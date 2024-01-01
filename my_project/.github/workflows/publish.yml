@@ -3,7 +3,7 @@ name: 🚀 Build and deploy container app to Azure Function App
 on:
   push:
     branches:
-      - feature/azure-deployment
+      - main
 
 jobs:
  build-and-deploy:
