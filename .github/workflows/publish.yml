@@ -14,6 +14,7 @@ jobs:
         directory:
           - backend
           - fronted
+
           
     steps:
     - name: 📂 Checkout repository
