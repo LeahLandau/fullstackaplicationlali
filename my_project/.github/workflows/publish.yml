@@ -67,13 +67,14 @@ jobs:
           type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
           type=semver,pattern={{major}},value=${{ env.TAG }}
  
-    - name: 🏗️ Build and push container image to registry
+   - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
-        context: ./${{ matrix.directory}}
+        context: ./${{ matrix.directory }}
         push: true
-        tags: ghcr.io/${{ env.REPO }}-${{ matrix.directory}}:${{ steps.get_release.outputs.tag_name }}
+        tags: ghcr.io/${{ env.REPO }}-${{ matrix.directory }}:${{ steps.get_release.outputs.tag_name }}
         labels: ${{ steps.docker_meta.outputs.labels }}
+        file: ./${{ matrix.directory }}/Dockerfile
 
    
  
