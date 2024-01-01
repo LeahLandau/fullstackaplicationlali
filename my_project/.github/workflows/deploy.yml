@@ -1,0 +1,15 @@
+#  - name: 🔑 Login to Azure
+#       uses: azure/login@v1
+#       with:
+#         creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+#  - name: 🚀 Build and deploy Container App
+#       uses: azure/container-apps-deploy-action@v1
+#       with:
+#         resource-group: ${{ secrets.AZURE_RESOURCE_GROUP }}
+#         name:  react-flask-aplication
+#         image: |
+#            'ghcr.io/${{ env.REPO }}-directory1:${{ steps.get_release.outputs.tag_name }}'
+#            'ghcr.io/${{ env.REPO }}-directory1:${{ steps.get_release.outputs.tag_name }}'
+#         registry-username: ${{ github.actor }}
+#         registry-password: ${{ secrets.GITHUB_TOKEN }}
