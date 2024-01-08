@@ -78,6 +78,7 @@ jobs:
         appName: full-stack-project 
         imageName: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
         # containerOsType: 'Linux'  
+        # 
 
   
 
