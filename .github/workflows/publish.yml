@@ -73,10 +73,9 @@ jobs:
     - name: Build and deploy Container App
       uses: azure/container-apps-deploy-action@v1
       with:
-        subscriptionId: a173eef2-33d7-4d55-b0b5-18b271f8d42b
         resourceGroup: gh-action-app-7117113225-2-rg
-        appName: full-stack-project 
-        imageName: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
+        acrName: full-stack-project 
+        imageToDeploy: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
         # containerOsType: 'Linux'  
         # 
 
