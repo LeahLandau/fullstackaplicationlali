@@ -1,0 +1,86 @@
+name: 🚀 publish apllication
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  publish:
+    runs-on: 'ubuntu-latest'  
+    steps:
+    - name: 📂 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: 🛠️ Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: 🔑 Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry:  ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    # - name: 🔖 Get release tag name
+    #   id: get_release
+    #   uses: cardinalby/git-get-release-action@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ github.token }}
+    #   with:
+    #     latest: true
+
+    - name: 🔄 downcase REPO
+      uses: ASzc/change-string-case-action@v1
+      id: downcase
+      with:
+          string: ${{ github.repository }}
+
+    - name: ♻️ Set correct environment
+      run: |
+        TAG=${{ steps.get_release.outputs.tag_name }}
+        echo "TAG=$TAG" >> "$GITHUB_ENV"
+        REPO=${{ steps.downcase.outputs.lowercase }}
+        echo "REPO=$REPO" >> "$GITHUB_ENV"
+
+    # - name: 🐳 Docker metadata
+    #   id: docker_meta
+    #   uses: docker/metadata-action@v5
+    #   with:
+    #     images: ghcr.io/${{ env.REPO }}-${{ matrix.directory}}
+    #     tags: |
+    #       type=semver,pattern={{major}}.{{minor}}.{{patch}},value=${{ env.TAG }}
+    #       type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
+    #       type=semver,pattern={{major}},value=${{ env.TAG }}
+ 
+    - name: 🏗️ Build and push container image to registry
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
+        # labels: ${{ steps.docker_meta.outputs.labels }}
+        file: ./Dockerfile
+
+    - name: Log in to Azure
+      uses: azure/login@v1
+      with:
+       creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    
+    - name: Build and deploy Container App
+      uses: azure/container-apps-deploy-action@v1
+      with:
+        subscriptionId: a173eef2-33d7-4d55-b0b5-18b271f8d42b
+        resourceGroup: gh-action-app-7117113225-2-rg
+        appName: full-stack-project 
+        imageName: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
+        # containerOsType: 'Linux'  
+
+  
+
+   
+ 
+   

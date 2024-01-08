@@ -1,0 +1,13 @@
+{
+  "name": "client",
+  "dockerComposeFile": "../../docker-compose.yaml",
+  "service": "client",
+  "workspaceFolder": "/client",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  }
+}

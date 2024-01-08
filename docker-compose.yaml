@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  server:
+    build:
+        dockerfile: Dockerfile
+        context: ./server
+    container_name: server
+    volumes:
+      - ./server:/server
+      - vistorage:/share/vistorage
+    ports:
+      - "5000:5000"
+    stdin_open: true
+
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    container_name: client
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    volumes:
+      - ./client:/client
+    environment: 
+      - FAST_REFRESH = false
+      - WDS_SOCKET_PORT=0
+      - WATCHPACK_POLLING=true
+      
+volumes:
+  vistorage:
+    driver: local
+    driver_opts:
+      type: "cifs"
+      o: "mfsymlinks,vers=${VERSION},username=${USER},password=${PASSWORD}==,addr=${ADDRESS}"
+      device: "${DEVICE}"
