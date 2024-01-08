@@ -60,7 +60,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
+        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:${{ github.sha }}
         # labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
 
@@ -75,7 +75,7 @@ jobs:
       with:
         resourceGroup: gh-action-app-7117113225-2-rg
         containerAppName: full-stack-project 
-        imageToDeploy: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
+        imageToDeploy: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:${{ github.sha }}'
         registryUrl: ghcr.io
         registryUsername: ${{ github.actor }}
         registryPassword: ${{ secrets.GITHUB_TOKEN }}
