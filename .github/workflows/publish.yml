@@ -76,6 +76,9 @@ jobs:
         resourceGroup: gh-action-app-7117113225-2-rg
         acrName: full-stack-project 
         imageToDeploy: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
+        registryUrl: ghcr.io
+        registryUsername: ${{ github.actor }}
+        registryPassword: ${{ secrets.GITHUB_TOKEN }}
         # containerOsType: 'Linux'  
         # 
 
