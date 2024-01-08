@@ -1,0 +1,42 @@
+name: Trigger auto deployment for full-stack-project
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/full-stack-project-AutoDeployTrigger-eb5da026-d47f-4f5f-a957-3973fde1c2a0.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.FULLSTACKPROJECT_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: ghcr.io
+          registryUsername: ${{ secrets.FULLSTACKPROJECT_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.FULLSTACKPROJECT_REGISTRY_PASSWORD }}
+          containerAppName: full-stack-project
+          resourceGroup: gh-action-app-7117113225-2-rg
+          imageToBuild: ghcr.io/full-stack-project:${{ github.sha }}
+          
+
+     
+
