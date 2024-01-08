@@ -74,7 +74,7 @@ jobs:
       uses: azure/container-apps-deploy-action@v1
       with:
         resourceGroup: gh-action-app-7117113225-2-rg
-        acrName: full-stack-project 
+        containerAppName: full-stack-project 
         imageToDeploy: 'ghcr.io/${{ env.REPO }}-my-fullstack-project:latest'
         registryUrl: ghcr.io
         registryUsername: ${{ github.actor }}
