@@ -60,7 +60,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:${{ github.sha }}
+        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
         # labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
 
@@ -91,7 +91,7 @@ jobs:
         containerAppName: tuesday
         resourceGroup: NetworkWatcherRG
         # imageToBuild: ghcr.io/leahlandau/tuesday:${{ github.sha }}
-        imageToDeploy: ghcr.io/${{ env.REPO }}-my-fullstack-project:${{ github.sha }}
+        imageToDeploy: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
      
 
   
