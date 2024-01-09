@@ -36,7 +36,7 @@ jobs:
           containerAppName: tuesday
           resourceGroup: NetworkWatcherRG
           imageToBuild: ghcr.io/leahlandau/tuesday:${{ github.sha }}
-          
+          imageToDeploy: ghcr.io/leahlandau/tuesday:${{ github.sha }}
 
      
 
