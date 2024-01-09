@@ -1,0 +1,42 @@
+name: Trigger auto deployment for tuesday3
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - '**'
+    - '.github/workflows/tuesday3-AutoDeployTrigger-ba094044-12f2-4863-9eb3-e35c29a72923.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:
+      
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.TUESDAY3_AZURE_CREDENTIALS }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }} 
+          registryUrl: ghcr.io
+          registryUsername: ${{ secrets.TUESDAY3_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.TUESDAY3_REGISTRY_PASSWORD }}
+          containerAppName: tuesday3
+          resourceGroup: NetworkWatcherRG
+          imageToBuild: ghcr.io/ghcr.io/leahlandau/fullstackaplicationlali-my-fullstack-project:${{ github.sha }}
+          
+
+     
+
