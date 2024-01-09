@@ -31,8 +31,8 @@ jobs:
         with:
           appSourcePath: ${{ github.workspace }} 
           registryUrl: ghcr.io
-          registryUsername: ${{ secrets.TUESDAY_REGISTRY_USERNAME }}
-          registryPassword: ${{ secrets.TUESDAY_REGISTRY_PASSWORD }}
+          registryUsername: ${{ github.actor }}
+          registryPassword: ${{ secrets.GITHUB_TOKEN }}
           containerAppName: tuesday
           resourceGroup: NetworkWatcherRG
           imageToBuild: ghcr.io/tuesday:${{ github.sha }}
