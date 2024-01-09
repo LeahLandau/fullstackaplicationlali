@@ -5,7 +5,7 @@ on:
   # Automatically trigger it when detected changes in repo
   push:
     branches: 
-      [ main ]
+      [ feature ]
     paths:
     - '**'
     - '.github/workflows/tuesday-AutoDeployTrigger-359fdd95-c043-4989-be30-95354f03df79.yml'
