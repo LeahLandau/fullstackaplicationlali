@@ -35,7 +35,7 @@ jobs:
           registryPassword: ${{ secrets.GITHUB_TOKEN }}
           containerAppName: tuesday
           resourceGroup: NetworkWatcherRG
-          imageToBuild: ghcr.io/tuesday:${{ github.sha }}
+          imageToBuild: ghcr.io/leahlandau/tuesday:${{ github.sha }}
           
 
      
