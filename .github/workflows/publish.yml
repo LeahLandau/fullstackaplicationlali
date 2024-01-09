@@ -92,7 +92,7 @@ jobs:
         resourceGroup: NetworkWatcherRG
         # imageToBuild: ghcr.io/leahlandau/tuesday:${{ github.sha }}
         imageToDeploy: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
-     
+        containerAppEnvironment: tuesday2	
 
   
 
