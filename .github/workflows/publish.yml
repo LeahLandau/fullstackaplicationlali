@@ -94,7 +94,7 @@ jobs:
         imageToDeploy: ghcr.io/${{ env.REPO }}-my-fullstack-project:${{ github.sha }}
      
 
-  # 
+  
 
    
  
