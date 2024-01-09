@@ -60,7 +60,7 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
+        tags: ghcr.io/${{ env.REPO }}-my-fullstack-project:${{ github.sha }}
         # labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
 
@@ -88,10 +88,10 @@ jobs:
         registryUrl: ghcr.io
         registryUsername: ${{ github.actor }}
         registryPassword: ${{ secrets.GITHUB_TOKEN }}
-        containerAppName: tuesday
+        containerAppName: tuesday3
         resourceGroup: NetworkWatcherRG
         # imageToBuild: ghcr.io/leahlandau/tuesday:${{ github.sha }}
-        imageToDeploy: ghcr.io/${{ env.REPO }}-my-fullstack-project:latest
+        imageToDeploy: ghcr.io/leahlandau/fullstackaplicationlali-my-fullstack-project:${{ github.sha }}
         containerAppEnvironment: tuesday2	
 
   
