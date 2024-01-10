@@ -8,6 +8,7 @@ setuptools.setup(
     },
     install_requires = [
         "rasterio",
+        "gunicorn",
         "numpy",
         "pytest",
         "pytest_mock",
@@ -15,6 +16,7 @@ setuptools.setup(
         "flask-cors",
         "waitress",
         "shapely",
+        "pyspark",
         "azure-storage-file",
         "python-dotenv",
     ],
@@ -22,6 +24,7 @@ setuptools.setup(
         "tests": ["pytest", "pytest_mock"],
         "server":["flask", "flask-cors", "waitress"],
         "geographic_processing":["rasterio", "shapely",  "numpy"],
+        "spark":["pyspark"],
         "Azure_communication":[ "azure-storage-file", "python-dotenv" ],
     },
 )
