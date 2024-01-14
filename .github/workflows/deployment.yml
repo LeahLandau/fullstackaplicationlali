@@ -68,7 +68,8 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
+        tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
+        # tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
 
@@ -97,10 +98,10 @@ jobs:
         registryPassword: ${{ secrets.GITHUB_TOKEN }}
         containerAppName: my-container-app
         resourceGroup: NetworkWatcherRG
-        imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
+        # imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
+        imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
 
   
 
-   
- 
+
    
