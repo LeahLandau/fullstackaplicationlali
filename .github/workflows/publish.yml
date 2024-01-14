@@ -32,7 +32,7 @@ jobs:
       with:
         # latest: false
         tag: 'v1.0.0'    
-        prerelease: true
+        # prerelease: true
 
 
 
