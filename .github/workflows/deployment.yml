@@ -37,7 +37,7 @@ jobs:
 
 
     - name: 🔖 Set fake release tag name
-      run: echo "FAKE_RELEASE_TAG=v0.0.0" >> "$GITHUB_ENV"
+      run: echo "FAKE_RELEASE_TAG=v0.0.1" >> "$GITHUB_ENV"
   
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
@@ -98,7 +98,7 @@ jobs:
         registryPassword: ${{ secrets.GITHUB_TOKEN }}
         containerAppName: my-container-app
         resourceGroup: NetworkWatcherRG
-        
+
         # imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
         imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
 
