@@ -30,8 +30,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        # latest: false
-        prerelease: true
+        latest: false
+        # prerelease: true
 
 
 
