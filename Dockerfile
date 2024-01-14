@@ -10,5 +10,4 @@ RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted
 
 EXPOSE 5000
 
-
 CMD ["gunicorn", "app:app", "--config=config/gunicorn_config.py"]
