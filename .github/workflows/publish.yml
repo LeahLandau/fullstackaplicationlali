@@ -30,7 +30,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ github.token }}
       with:
-        latest: false
+        # latest: false
+        prerelease: true
+
 
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
