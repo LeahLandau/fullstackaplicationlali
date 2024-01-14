@@ -1,9 +1,0 @@
-rasterio
-numpy
-pytest
-pytest_mock
-flask
-flask-cors
-waitress
-shapely
-pyspark
