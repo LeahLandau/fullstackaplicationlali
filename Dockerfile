@@ -7,8 +7,8 @@ COPY . .
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org Flask
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org gunicorn
 
-ENV PASSWORD=${PASSWORD}
-ENV USER=${USER_NAME}
+
+
 
 
 EXPOSE 5000
