@@ -24,19 +24,21 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 🔖 Get release tag name
-      id: get_release
-      uses: cardinalby/git-get-release-action@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        # latest: false
-        tag: 'v1.0.0'    
-        # prerelease: true
+    # - name: 🔖 Get release tag name
+    #   id: get_release
+    #   uses: cardinalby/git-get-release-action@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ github.token }}
+    #   with:
+    #     # latest: false
+    #     tag: 'v1.0.0'    
+    #     prerelease: true
 
 
 
-
+    - name: 🔖 Set fake release tag name
+      run: echo "FAKE_RELEASE_TAG=v0.0.0" >> "$GITHUB_ENV"
+  
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
       id: downcase
@@ -45,7 +47,8 @@ jobs:
 
     - name: ♻️ Set correct environment
       run: |
-        TAG=${{ steps.get_release.outputs.tag_name }}
+        # TAG=${{ steps.get_release.outputs.tag_name }}
+        TAG=${{ env.FAKE_RELEASE_TAG }}
         echo "TAG=$TAG" >> "$GITHUB_ENV"
         REPO=${{ steps.downcase.outputs.lowercase }}
         echo "REPO=$REPO" >> "$GITHUB_ENV"
