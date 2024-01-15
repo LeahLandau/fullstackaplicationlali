@@ -1,18 +1,21 @@
-FROM python:3.8-slim
+# keep our base image as small as possible
+FROM nginx/unit:1.19.0-python3.7
 
-WORKDIR /usr/src/app
+# --- NETFREE CERT INTSALL ---
+# ADD https://netfree.link/dl/unix-ca.sh /home/netfree-unix-ca.sh 
+# RUN cat  /home/netfree-unix-ca.sh | sh
+# ENV NODE_EXTRA_CA_CERTS=/etc/ca-bundle.crt
+# ENV REQUESTS_CA_BUNDLE=/etc/ca-bundle.crt
+# ENV SSL_CERT_FILE=/etc/ca-bundle.crt
+# --- END NETFREE CERT INTSALL ---
 
-ARG REACT_APP_SERVER_PATH
-ARG REACT_APP_VOLUME_NAME
-ENV REACT_APP_SERVER_PATH=$REACT_APP_SERVER_PATH
-ENV REACT_APP_VOLUME_NAME=$REACT_APP_VOLUME_NAME
+# port used by the listener in config.json
+EXPOSE 8080
 
-COPY . .
+COPY requirements.txt /config/requirements.txt
+RUN apt update && apt install -y python3-pip    \
+    && pip3 install -r /config/requirements.txt \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org Flask
-RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org gunicorn
-
-EXPOSE 5000
-
-
-CMD ["gunicorn", "app:app", "--config=config/gunicorn_config.py"]
+COPY config.json /docker-entrypoint.d/config.json
+COPY app.py /www/app.py
