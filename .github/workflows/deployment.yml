@@ -64,8 +64,8 @@ jobs:
           type=semver,pattern={{major}},value=${{ env.TAG }}
     - name: print-vars
       run: |
-        echo "REACT_APP_SERVER_PATH=${{ vars.REACT_APP_SERVER_PATH }}"
-        echo "REACT_APP_VOLUME_NAME=${{ vars.REACT_APP_VOLUME_NAME }}"
+        echo "REACT_APP_SERVER_PATH=${{ env.REACT_APP_SERVER_PATH }}"
+        echo "REACT_APP_VOLUME_NAME=${{ env.REACT_APP_VOLUME_NAME }}"
 
     - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
