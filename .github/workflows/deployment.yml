@@ -72,6 +72,9 @@ jobs:
         # tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
+        build-args: |
+          REACT_APP_SERVER_PATH=${{ env.REACT_APP_SERVER_PATH }}
+          REACT_APP_VOLUME_NAME=${{ env.REACT_APP_VOLUME_NAME }}
 
     - name: Log in to Azure
       uses: azure/login@v1
@@ -90,17 +93,17 @@ jobs:
     #     registryPassword: ${{ secrets.GITHUB_TOKEN }}
         # containerOsType: 'Linux'  
         # 
-    - name: Build and push container image to registry
-      uses: azure/container-apps-deploy-action@v2
-      with:
-        registryUrl: ghcr.io
-        registryUsername: ${{ github.actor }}
-        registryPassword: ${{ secrets.GITHUB_TOKEN }}
-        containerAppName: my-container-app
-        resourceGroup: NetworkWatcherRG
+    # - name: Build and push container image to registry
+    #   uses: azure/container-apps-deploy-action@v2
+    #   with:
+    #     registryUrl: ghcr.io
+    #     registryUsername: ${{ github.actor }}
+    #     registryPassword: ${{ secrets.GITHUB_TOKEN }}
+    #     containerAppName: my-container-app
+    #     resourceGroup: NetworkWatcherRG
 
-        # imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
-        imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
+    #     # imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
+    #     imageToDeploy: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
 
   
 
