@@ -62,7 +62,11 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}.{{patch}},value=${{ env.TAG }}
           type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
           type=semver,pattern={{major}},value=${{ env.TAG }}
- 
+    - name: print-vars
+      run: |
+        echo "REACT_APP_SERVER_PATH=${{ vars.REACT_APP_SERVER_PATH }}"
+        echo "REACT_APP_VOLUME_NAME=${{ vars.REACT_APP_VOLUME_NAME }}"
+
     - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
@@ -73,9 +77,9 @@ jobs:
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
         build-args: |
-          REACT_APP_SERVER_PATH=${{ env.REACT_APP_SERVER_PATH }}
-          REACT_APP_VOLUME_NAME=${{ env.REACT_APP_VOLUME_NAME }}
-
+          REACT_APP_SERVER_PATH=${{ vars.REACT_APP_SERVER_PATH }}
+          REACT_APP_VOLUME_NAME=${{ vars.REACT_APP_VOLUME_NAME }}
+ 
     - name: Log in to Azure
       uses: azure/login@v1
       with:
