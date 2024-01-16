@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { createUseStyles } from 'react-jss';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import ImgContext from '../context/ImageReduction';
 import { ServerConfig } from '../configs/server';
 
@@ -29,10 +29,6 @@ const Submit = () => {
     const css = useStyles();
 
     const { imagePath, setImagePath, polygonFrame, setResponse, inputsRef, submitRef, loaderRef, responseRef } = useContext(ImgContext);
-
-    useEffect(() => {
-        setImagePath(`/share/vistorage/${imagePath}`)
-    }, [])
     const handleClick = async (e) => {
         e.preventDefault()
         const imageDetails = { imagePath, polygonFrame }
@@ -49,6 +45,7 @@ const Submit = () => {
     const backClick = (e) => {
         setImagePath(null)
     }
+
     return <>
         <div ref={submitRef}>
             <button onClick={(e) => handleClick(e)}> Send to censor </button>

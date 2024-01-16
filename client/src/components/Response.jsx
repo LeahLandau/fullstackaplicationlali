@@ -2,6 +2,7 @@ import { createUseStyles } from 'react-jss';
 import { useContext } from 'react';
 
 import ImgContext from '../context/ImageReduction';
+import ReducedImage from './ReducedImage';
 
 const useStyles = createUseStyles({
     response: {
@@ -24,6 +25,7 @@ const Response = () => {
             <h1>
                 {response}
             </h1>
+            <ReducedImage></ReducedImage>
         </div>
     </>
 }

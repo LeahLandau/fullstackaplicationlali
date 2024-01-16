@@ -4,12 +4,12 @@ services:
 
   server:
     build:
-        dockerfile: Dockerfile
-        context: ./server
+      dockerfile: Dockerfile
+      context: ./server
     container_name: server
     volumes:
-      - ./server:/server
-      - vistorage:/share/vistorage
+      - ./server:/app
+      - images:/images
     ports:
       - "5000:5000"
     stdin_open: true
@@ -23,16 +23,18 @@ services:
       - "3000:3000"
     stdin_open: true
     volumes:
-      - ./client:/client
+      - ./client:/app
+      - images:/app/public/images
     environment: 
       - FAST_REFRESH = false
       - WDS_SOCKET_PORT=0
       - WATCHPACK_POLLING=true
-      
+
 volumes:
-  vistorage:
+  images:
+    name: images
     driver: local
     driver_opts:
-      type: "cifs"
-      o: "mfsymlinks,vers=${VERSION},username=${USER},password=${PASSWORD}==,addr=${ADDRESS}"
+      type: none
       device: "${DEVICE}"
+      o: bind

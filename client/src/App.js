@@ -1,10 +1,8 @@
-// import ImageReduction from './components/ImageReduction'
+import ImageReduction from './components/ImageReduction'
 
 function App() {
   return <>
-  <div>
-    wwwwwwwweeeeeeeeelllllllcoommmmeeee!!!!!!!!!!
-  </div>
+    <ImageReduction></ImageReduction>
   </>;
 }
 

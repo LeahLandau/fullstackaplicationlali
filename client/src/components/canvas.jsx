@@ -1,6 +1,4 @@
-import axios from "axios";
 import { useRef, useEffect, useState, useContext } from "react"
-import { ServerConfig } from "../configs/server";
 import ImgContext from "../context/ImageReduction";
 
 const Canvas = () => {
@@ -10,15 +8,20 @@ const Canvas = () => {
     const [lastPoint, setLastPoint] = useState([]);
     const [src, setSrc] = useState("")
 
+
+    useEffect(() => {
+        setSrc(imagePath);
+    }, [imagePath]);
+    
     useEffect(() => {
         const canvas = canvasRef.current;
         const context = canvas.getContext("2d");
         const loadImage = () => {
             const imgOnCanvas = new Image();
+            imgOnCanvas.src = src;
             imgOnCanvas.onload = () => {
                 context.drawImage(imgOnCanvas, 0, 0, canvas.width, canvas.height);
             };
-            imgOnCanvas.src = src;
         };
         if (src) {
             loadImage();
@@ -26,11 +29,6 @@ const Canvas = () => {
         }
     }, [src]);
 
-    useEffect(() => {
-        axios.get(`${ServerConfig.PATH}/get_url_by_path?path=${imagePath}`).then((response) => {
-            setSrc(response.data);
-        })
-    }, [imagePath]);
 
     const startDrawing = (e) => {
         setIsDrawing(true);
@@ -59,7 +57,7 @@ const Canvas = () => {
 
     return <>
         <div ref={inputsRef}>
-            <canvas ref={canvasRef} id="canvas" src={src}
+            <canvas ref={canvasRef} id="canvas" src={src} height={200}
                 onMouseDown={startDrawing} onMouseMove={draw} onMouseUp={stopDrawing} onMouseOut={stopDrawing} />
         </div>
     </>

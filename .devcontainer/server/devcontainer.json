@@ -1,0 +1,13 @@
+{
+  "name": "server",
+  "dockerComposeFile": "../../docker-compose.yaml",
+  "service": "server",
+  "workspaceFolder": "/server",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "streetsidesoftware.code-spell-checker"
+      ]
+    }
+  }
+}

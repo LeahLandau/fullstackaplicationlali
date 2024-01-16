@@ -1,13 +1,10 @@
 name: 🚀 publish apllication
 
 on:
-  push:
-    branches:
-    - main
+  workflow_dispatch:
 
 jobs:
   publish:
-
     runs-on: 'ubuntu-latest'  
     environment: production
     steps:
@@ -26,21 +23,14 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    # - name: 🔖 Get release tag name
-    #   id: get_release
-    #   uses: cardinalby/git-get-release-action@v1
-    #   env:
-    #     GITHUB_TOKEN: ${{ github.token }}
-    #   with:
-    #     # latest: false
-    #     tag: 'v1.0.0'    
-    #     prerelease: true
+    - name: 🔖 Get release tag name
+      id: get_release
+      uses: cardinalby/git-get-release-action@v1
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      with:
+        latest: true
 
-
-
-    - name: 🔖 Set fake release tag name
-      run: echo "FAKE_RELEASE_TAG=v0.0.1" >> "$GITHUB_ENV"
-  
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
       id: downcase
@@ -49,8 +39,7 @@ jobs:
 
     - name: ♻️ Set correct environment
       run: |
-        # TAG=${{ steps.get_release.outputs.tag_name }}
-        TAG=${{ env.FAKE_RELEASE_TAG }}
+        TAG=${{ steps.get_release.outputs.tag_name }}
         echo "TAG=$TAG" >> "$GITHUB_ENV"
         REPO=${{ steps.downcase.outputs.lowercase }}
         echo "REPO=$REPO" >> "$GITHUB_ENV"
@@ -64,18 +53,23 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}.{{patch}},value=${{ env.TAG }}
           type=semver,pattern={{major}}.{{minor}},value=${{ env.TAG }}
           type=semver,pattern={{major}},value=${{ env.TAG }}
-    # - name: print-vars
-    #   run: |
-    #     echo "REACT_APP_SERVER_PATH=${{ env.REACT_APP_SERVER_PATH }}"
-    #     echo "REACT_APP_VOLUME_NAME=${{ env.REACT_APP_VOLUME_NAME }}"
-
+ 
     - name: 🏗️ Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
-        # tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
+        tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
-          
+        build-args: |
+          REACT_APP_SERVER_PATH=${{ vars.REACT_APP_SERVER_PATH }}
+          REACT_APP_VOLUME_NAME=${{ vars.REACT_APP_VOLUME_NAME }}
+
+   
+
+  
+
+   
+ 
+   
