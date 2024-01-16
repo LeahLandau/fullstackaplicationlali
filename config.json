@@ -1,14 +1,11 @@
 {
     "listeners": {
       "*:8080": {
-        "pass": "applications/routes"
+        "pass": "routes"
       }
     },
     "routes": [
       {
-        "match": {
-          "uri": "^/api/"
-        },
         "action": {
           "pass": "applications/python_app"
         }
@@ -28,15 +25,9 @@
       },
       "python_app": {
         "type": "python",
-        "path": "/app/www/src",
+        "path": "/app/www",
         "module": "app",
         "callable": "app"
-      },
-      "index": {
-        "type": "static",
-        "root": "/app/build",
-        "index": "index.html",
-        "try_files": ["$uri", "/index.html"]
       }
     }
   }
