@@ -8,7 +8,8 @@
       "python_app": {
         "type": "python",
         "path": "/www/",
-        "module": "app"
+        "module": "app",
+        "callable": "app"
       }
     }
   }
