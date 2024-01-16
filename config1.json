@@ -1,0 +1,22 @@
+{
+    "listeners": {
+      "*:8080": {
+        "pass": "applications/python_app"
+      }
+    },
+    "applications": {
+      "python_app": {
+        "type": "python",
+        "path": "/www/",
+        "module": "app",
+        "callable": "app"
+      },
+      "/": {
+        "type": "python",
+        "path": "/app/build",
+        "module": "index",
+        "callable": "app"
+      }
+    }
+
+  }

@@ -78,3 +78,4 @@ jobs:
         # tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ github.sha }}
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
+          
