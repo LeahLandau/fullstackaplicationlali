@@ -14,7 +14,7 @@ def index():
     return app.send_static_file("index.html")
 
 @app.route('/api')
-def index():
+def api():
     return 'Image-Reduction'
 
 # if __name__ == '__main__':
