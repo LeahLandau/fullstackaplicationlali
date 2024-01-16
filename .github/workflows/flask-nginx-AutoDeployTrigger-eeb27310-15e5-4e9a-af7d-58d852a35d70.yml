@@ -5,7 +5,7 @@ on:
   # Automatically trigger it when detected changes in repo
   push:
     branches: 
-      [ main ]
+      [ feature ]
     paths:
     - '**'
     - '.github/workflows/flask-nginx-AutoDeployTrigger-eeb27310-15e5-4e9a-af7d-58d852a35d70.yml'
