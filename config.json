@@ -10,6 +10,13 @@
         "path": "/www/",
         "module": "app",
         "callable": "app"
+      },
+      "/": {
+        "type": "python 3.x",
+        "path": "/app/build",
+        "module": "index",
+        "callable": "app"
       }
     }
+
   }

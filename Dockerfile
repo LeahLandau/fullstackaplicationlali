@@ -15,11 +15,11 @@ FROM unit:1.31.1-python3.11
 WORKDIR /app
 COPY --from=build-step /app/build ./build
 COPY ./server ./server
-WORKDIR /app/server
+# WORKDIR /app/server
 RUN pip install .
-WORKDIR /app/server/src
+# WORKDIR /app/server/src
 COPY config.json /docker-entrypoint.d/config.json
-COPY app.py /www/app.py
+COPY server/src/app.py /www/app.py
 EXPOSE 8080
 
 
