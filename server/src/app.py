@@ -13,9 +13,9 @@ CORS(app)
 def index():
     return app.send_static_file("index.html")
 
-# @app.route('/api')
-# def index():
-#     return 'Image-Reduction'
+@app.route('/api')
+def index():
+    return 'Image-Reduction'
 
 # if __name__ == '__main__':
 #     serve(app, host="0.0.0.0", port=5000)
