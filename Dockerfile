@@ -18,9 +18,9 @@ COPY --from=build-step /app/build ./build
 # COPY server/src/app.py /www/app.py
 # COPY ./server ./server
 COPY ./server ./www
-WORKDIR /app/server
-RUN pip install .
+WORKDIR /app/www
 # WORKDIR /app/server/src
+RUN pip install .
 
 EXPOSE 8080
 
