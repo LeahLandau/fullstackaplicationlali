@@ -1,7 +1,8 @@
 name: 🚀 publish apllication
 
 on:
-  workflow_dispatch:
+  push:
+    branches: ["main"]
 
 jobs:
   publish:
