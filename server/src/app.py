@@ -1,3 +1,25 @@
+
+from flask import Flask
+# app = Flask(__name__,static_folder='../../build',static_url_path='/')
+# application = app
+
+app = Flask(__name__, static_folder='../../build', static_url_path='/')
+
+
+CORS(app) 
+
+
+@app.route("/")
+def index():
+    return app.send_static_file("index.html")
+
+
+@app.route("/hello_world")
+def hello_world():
+    return 'Hello, World!'
+
+
+
 # from flask import Flask
 # from flask_cors import CORS
 # from waitress import serve
@@ -19,11 +41,11 @@
 # if __name__ == '__main__':
 #     serve(app, host="0.0.0.0", port=8080)
 
-from flask import Flask
-app = Flask(__name__)
-# application = app
+# from flask import Flask
+# app = Flask(__name__)
+# # application = app
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# @app.route('/')
+# def hello_world():
+#     return 'Hello, World!'

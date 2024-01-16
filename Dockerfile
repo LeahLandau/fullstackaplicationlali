@@ -12,13 +12,13 @@ RUN npm run build
 
 
 FROM unit:1.31.1-python3.11
-WORKDIR /app
+# WORKDIR /app
 COPY config.json /docker-entrypoint.d/config.json
 COPY --from=build-step /app/build ./build
 # COPY server/src/app.py /www/app.py
 # COPY ./server ./server
 COPY ./server ./www
-WORKDIR /app/www
+WORKDIR /www
 # WORKDIR /app/server/src
 RUN pip install .
 
