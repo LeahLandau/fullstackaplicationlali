@@ -1,24 +1,12 @@
 {
     "listeners": {
       "*:8080": {
-        "pass": "routes"
+        "pass": "applications/react_app"
+      },
+      "*:8080/api/*": {
+        "pass": "applications/python_app"
       }
     },
-    "routes": [
-      {
-        "match": {
-          "uri": "^/api/"
-        },
-        "action": {
-          "pass": "applications/python_app"
-        }
-      },
-      {
-        "action": {
-          "pass": "applications/react_app"
-        }
-      }
-    ],
     "applications": {
       "react_app": {
         "type": "static",
