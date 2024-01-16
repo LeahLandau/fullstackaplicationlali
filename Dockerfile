@@ -24,4 +24,4 @@ RUN pip install .
 
 EXPOSE 8080
 
-CMD ["unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
+# CMD ["unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
