@@ -1,7 +1,7 @@
 {
     "listeners": {
       "*:8080": {
-        "pass": "routes"
+        "pass": "applications/routes"
       }
     },
     "routes": [
@@ -31,6 +31,12 @@
         "path": "/app/www/src",
         "module": "app",
         "callable": "app"
+      },
+      "index": {
+        "type": "static",
+        "root": "/app/build",
+        "index": "index.html",
+        "try_files": ["$uri", "/index.html"]
       }
     }
   }
