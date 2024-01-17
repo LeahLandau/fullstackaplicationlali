@@ -15,7 +15,7 @@ const SelectionImage = () => {
     const createObject = (arr, num, val = '') => {
 
         const arrSplit = arr.map((item) => {
-            const element = item.split("/").slice(num + 2)
+            const element = item.split("/").slice(num + 3)
             return element[0]
         })
         const arrWithoutMulti = arrSplit.filter((value, index) => arrSplit.indexOf(value) === index)
