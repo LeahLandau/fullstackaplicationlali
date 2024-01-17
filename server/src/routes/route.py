@@ -29,3 +29,7 @@ def get_images_and_folders_names():
         return result, 200
     except Exception as error:
         return handle_error(error)
+
+@routes.route('/images/grhy.jp2', methods=['GET'])
+def images():
+    return "Dfghdredgfghfggvhfgdresfdgd"
