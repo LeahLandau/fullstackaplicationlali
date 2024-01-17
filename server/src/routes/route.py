@@ -27,6 +27,7 @@ def get_images_and_folders_names():
         if(args.get('directory_path') is None):
             return jsonify('The directory path must be provided'), 400
         result = get_images_names(args.get('directory_path'))
+        print('result',result)
         if isinstance(result, FileNotFoundError):
             return result.args[0], 200
         return result, 200
