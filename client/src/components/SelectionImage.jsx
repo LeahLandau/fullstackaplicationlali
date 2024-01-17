@@ -64,7 +64,7 @@ const SelectionImage = () => {
 
         if (!clickedNode.isFolder) {
             const path = clickedNode.path
-            setImagePath(`/images${path}`)
+            setImagePath(`../../build/images${path}`)
         }
     };
 
