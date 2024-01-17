@@ -31,7 +31,7 @@ const SelectionImage = () => {
 
     useEffect(() => {
         const get_images_names = async () => {
-            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/images`)
+            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/build/images`)
             if (Array.isArray(response.data)) {
                 const hierarchical = response.data;
                 if (response.data !== []) {
@@ -64,7 +64,7 @@ const SelectionImage = () => {
 
         if (!clickedNode.isFolder) {
             const path = clickedNode.path
-            setImagePath(`http://localhost:8080/images${path}`)
+            setImagePath(`/images${path}`)
         }
     };
 
