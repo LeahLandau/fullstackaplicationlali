@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-# from waitress import serve
+from waitress import serve
 
 from routes.route import *
 
@@ -17,5 +17,5 @@ def index():
 def api():
     return 'Image-Reduction'
 
-# if __name__ == '__main__':
-#     serve(app, host="0.0.0.0", port=5000)
+if __name__ == '__main__':
+    serve(app, host="0.0.0.0", port=8080)
