@@ -35,6 +35,7 @@ const Submit = () => {
         inputsRef.current.style.display = 'none'
         submitRef.current.style.display = 'none'
         loaderRef.current.style.display = 'block'
+        console.log({imageDetails});
         const response = await axios.post(`${ServerConfig.PATH}/blackening_pixels`, imageDetails)
         setTimeout(() => {
             loaderRef.current.style.display = 'none'

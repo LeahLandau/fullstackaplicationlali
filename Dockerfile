@@ -11,12 +11,15 @@ RUN npm run build
 
 
 FROM unit:1.31.1-python3.11 as server-builder
+
 COPY config.json /docker-entrypoint.d/config.json
 COPY --from=client-builder /build ./build
 COPY images /build/images
 COPY images /images
 COPY ./server ./www
+
 WORKDIR /www
+
 RUN pip install .
 EXPOSE 8080
 
