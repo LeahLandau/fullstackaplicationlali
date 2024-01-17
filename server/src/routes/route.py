@@ -30,6 +30,6 @@ def get_images_and_folders_names():
     except Exception as error:
         return handle_error(error)
 
-@routes.route('/images/grhy.jp2', methods=['GET'])
-def images():
-    return "Dfghdredgfghfggvhfgdresfdgd"
+# @routes.route('/images/grhy.jp2', methods=['GET'])
+# def images():
+#     return "Dfghdredgfghfggvhfgdresfdgd"
