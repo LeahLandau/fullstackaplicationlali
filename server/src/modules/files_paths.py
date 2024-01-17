@@ -20,6 +20,6 @@ def get_images_names(directory_path):
 def append_jp2_images(dirpath, files):
         jp2_image_names = []
         for file_name in files:
-            if image_in_required_format(file_name, '.jp2'):
+            if image_in_required_format(file_name, '.jpg'):
                 jp2_image_names.append(os.path.join(dirpath, file_name) )
         return jp2_image_names

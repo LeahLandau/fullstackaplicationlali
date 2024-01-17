@@ -8,7 +8,7 @@ from .files_paths import *
 def modify_image(file_path, polygon_frame):
     print("4444444444444")
     path_exist(file_path) 
-    file_is_jp2_image(file_path) 
+    # file_is_jp2_image(file_path) 
     polygon_pixels = full_polygon(polygon_frame)
     open_read_write_image(file_path, polygon_pixels)
     return 'The image has been blackened successfully'

@@ -24,7 +24,7 @@ const SelectionImage = () => {
             const path = `${val}/${item}`;
             const pathStart = path.startsWith('/') ? path : '/' + path;
             const arrFiltered = arr.filter((element) => element.startsWith(`/images${pathStart}`));
-            return (item.endsWith(".jpeg")) || (item.endsWith(".jp2")) ? { name: item, path: path, isFolder: false } :
+            return (item.endsWith(".jpg")) || (item.endsWith(".jp2")) ? { name: item, path: path, isFolder: false } :
                 { name: item, path: path, isFolder: true, items: createObject(arrFiltered, num + 1, path) };
         });
     }
@@ -64,7 +64,7 @@ const SelectionImage = () => {
 
         if (!clickedNode.isFolder) {
             const path = clickedNode.path
-            setImagePath(`http://localhost:8080/images${path}`)
+            setImagePath(`/images${path}`)
         }
     };
 
