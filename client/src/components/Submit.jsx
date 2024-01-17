@@ -36,7 +36,7 @@ const Submit = () => {
         submitRef.current.style.display = 'none'
         loaderRef.current.style.display = 'block'
         console.log({imageDetails});
-        const response = await axios.post(`${ServerConfig.PATH}/blackening_pixels`, imageDetails)
+        const response = await axios.post(`${ServerConfig.PATH}/blackening_pixels`, imageDetails,{ headers: { 'Content-Type': 'application/json' } })
         setTimeout(() => {
             loaderRef.current.style.display = 'none'
             responseRef.current.style.display = 'block'
