@@ -34,6 +34,3 @@ def get_images_and_folders_names():
     except Exception as error:
         return handle_error(error)
 
-@routes.route('/images', methods=['POST'])
-def images():
-    return "Dfghdredgfghfggvhfgdresfdgd"
