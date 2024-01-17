@@ -6,6 +6,7 @@ from .handle_error import *
 from .files_paths import *
 
 def modify_image(file_path, polygon_frame):
+    print("4444444444444")
     path_exist(file_path) 
     file_is_jp2_image(file_path) 
     polygon_pixels = full_polygon(polygon_frame)
@@ -17,6 +18,7 @@ def file_is_jp2_image(file_path):
     raise Exception('The file is not a jp2 image')
 
 def full_polygon(polygon_frame):
+    polygon_frame = json.loads(polygon_frame)
     polygon_fill = fill_polygon(polygon_frame)
     if polygon_fill.size == 0:
       return polygon_frame
