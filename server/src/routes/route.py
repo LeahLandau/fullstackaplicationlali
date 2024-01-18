@@ -9,7 +9,6 @@ routes = Blueprint('routes', __name__)
 @routes.route('/api/blackening_pixels', methods=['POST'])
 def blackening_pixels():
     try:
-        print("11111111")
         body = request.get_json()
         result = modify_image(body['imagePath'], body['polygonFrame'])
         print("2222222222")
@@ -19,7 +18,8 @@ def blackening_pixels():
     except Exception as error:
         print("33333333")
         return handle_error(error)
-
+    
+    
 @routes.route('/api/get_images_names', methods=['GET'])
 def get_images_and_folders_names():
     try:
