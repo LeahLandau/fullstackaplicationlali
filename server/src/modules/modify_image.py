@@ -41,4 +41,3 @@ def blackening_pixels(image_pixels, matrix_of_pixels):
       row, column = pixel
       image_pixels[:, row, column] = 0
     return image_pixels
-  

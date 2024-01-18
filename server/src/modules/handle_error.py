@@ -12,5 +12,5 @@ def setup_logger():
 logger = setup_logger()
 
 def handle_error(error):
-    logger.info(f'Error in {__name__} file. The error is: "{error}"')
-    return error
+    logger.info(f'The error is: "{error}"')
+    return str(error)
