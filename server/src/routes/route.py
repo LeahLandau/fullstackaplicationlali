@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request,abort
 
 from modules.files_paths import *
 from modules.modify_image import *
@@ -30,6 +30,7 @@ def blackening_pixels():
     except Exception as error:
         error = handle_error(error)
         abort(400, error)
+        
     
     
 @routes.route('/api/get_images_names', methods=['GET'])
