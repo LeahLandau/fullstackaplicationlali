@@ -16,8 +16,6 @@ USER root
 
 COPY config.json /docker-entrypoint.d/config.json
 COPY --from=client-builder /build ./build
-# COPY images /build/images
-# COPY images /images
 COPY ./server ./www
 
 WORKDIR /www
@@ -25,3 +23,4 @@ WORKDIR /www
 RUN pip install .
 EXPOSE 8080
 
+# CMD ["sudo","unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock", "--log", "/usr/app/unit.log"]
