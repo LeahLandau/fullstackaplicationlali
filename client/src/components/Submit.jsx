@@ -31,13 +31,13 @@ const Submit = () => {
     const { imagePath, setImagePath, polygonFrame, setResponse, inputsRef, submitRef, loaderRef, responseRef } = useContext(ImgContext);
     const handleClick = async (e) => {
         e.preventDefault()
-        const imageDetails = { imagePath }
+        const imageDetails = { imagePath, polygonFrame: JSON.stringify(polygonFrame) }
+        // const imageDetails = { imagePath }
         // const imageDetails = { imagePath, polygonFrame }
         inputsRef.current.style.display = 'none'
         submitRef.current.style.display = 'none'
         loaderRef.current.style.display = 'block'
         console.log({imageDetails});
-                            //    axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/build/images`)
         const response = await axios.post(`${ServerConfig.PATH}/blackening_pixels`, imageDetails)
         setTimeout(() => {
             loaderRef.current.style.display = 'none'
