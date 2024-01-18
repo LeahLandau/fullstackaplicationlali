@@ -31,7 +31,7 @@ const SelectionImage = () => {
 
     useEffect(() => {
         const get_images_names = async () => {
-            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/build/images`)
+            const response = await axios.get(`${ServerConfig.PATH}api/get_images_names?directory_path=/build/images`)
             if (Array.isArray(response.data)) {
                 const hierarchical = response.data;
                 if (response.data !== []) {
