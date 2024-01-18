@@ -29,6 +29,7 @@ def blackening_pixels():
         abort(404, error)
     except Exception as error:
         error = handle_error(error)
+        print("error",error)
         abort(400, error)
         
     
