@@ -26,7 +26,8 @@ def full_polygon(polygon_frame):
     if polygon_fill.size == 0:
       return polygon_frame
     return np.concatenate((polygon_frame, polygon_fill), axis = 0)
-    
+
+
 def fill_polygon(polygon_frame):
     minx, miny = np.min(polygon_frame, axis=0)
     maxx, maxy = np.max(polygon_frame, axis=0)

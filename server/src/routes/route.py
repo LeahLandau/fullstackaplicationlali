@@ -22,15 +22,16 @@ routes = Blueprint('routes', __name__)
 def blackening_pixels():
     try:
         body = request.get_json()
-        result = modify_image(body['imagePath'], body['polygonFrame'])
-        return result, 200
-    except FileNotFoundError as error:
-        error = handle_error(error)
-        abort(404, error)
-    except Exception as error:
-        error = handle_error(error)
-        print("error",error)
-        abort(400, error)
+        return jsonify(body)
+    #     result = modify_image(body['imagePath'], body['polygonFrame'])
+    #     return result, 200
+    # except FileNotFoundError as error:
+    #     error = handle_error(error)
+    #     abort(404, error)
+    # except Exception as error:
+    #     error = handle_error(error)
+    #     print("error",error)
+    #     abort(400, error)
         
     
     
