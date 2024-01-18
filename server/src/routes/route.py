@@ -20,9 +20,9 @@ routes = Blueprint('routes', __name__)
 #         return handle_error(error)
 @routes.route('/api/blackening_pixels', methods=['POST'])
 def blackening_pixels():
-    try:
-        body = request.get_json()
-        return jsonify(body)
+    # try:
+    body = request.get_json()
+    return jsonify(body)
     #     result = modify_image(body['imagePath'], body['polygonFrame'])
     #     return result, 200
     # except FileNotFoundError as error:
