@@ -7,7 +7,7 @@ from .files_paths import *
 
 def modify_image(file_path, polygon_frame):
     print("4444444444444")
-    file_path = f'/build/{file_path}'
+    file_path = f'/build{file_path}'
     print(file_path)
     path_exist(file_path) 
     print("ddddddddddddddd")
