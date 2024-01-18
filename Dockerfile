@@ -15,8 +15,8 @@ FROM unit:1.31.1-python3.11 as server-builder
 
 COPY config.json /docker-entrypoint.d/config.json
 COPY --from=client-builder /build ./build
+# COPY ./server/var/log/unit/ ./var/log/unit/
 COPY ./server ./www
-COPY ./server/var/log/unit/ ./var/log/unit/
 WORKDIR /www
 
 RUN pip install .
