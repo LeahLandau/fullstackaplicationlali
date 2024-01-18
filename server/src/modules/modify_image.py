@@ -7,7 +7,10 @@ from .files_paths import *
 
 def modify_image(file_path, polygon_frame):
     print("4444444444444")
+    file_path = f'/build/{file_path}'
+    print(file_path)
     path_exist(file_path) 
+    print("ddddddddddddddd")
     # file_is_jp2_image(file_path) 
     polygon_pixels = full_polygon(polygon_frame)
     open_read_write_image(file_path, polygon_pixels)
