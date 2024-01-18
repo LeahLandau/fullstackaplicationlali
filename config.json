@@ -1,16 +1,19 @@
 {
-    "listeners": {
-      "*:8080": {
-        "pass": "applications/python_app"
-      }
-    },
-    "applications": {
-      "python_app": {
-        "type": "python",
-        "path": "/www/src",
-        "module": "app",
-        "callable": "app"
-      }
+  "listeners": {
+    "*:8080": {
+      "pass": "applications/python_app"
     }
-
+  },
+  "applications": {
+    "python_app": {
+      "type": "python",
+      "path": "/www/src",
+      "module": "app",
+      "callable": "app"
+    }
+  },
+  "access_log": {
+    "path": "/var/log/unit/access.log",
+    "format": "$remote_addr - - [$time_local] \"$request_line\" $status $body_bytes_sent \"$header_referer\" \"$header_user_agent\" $request_time"
   }
+}
