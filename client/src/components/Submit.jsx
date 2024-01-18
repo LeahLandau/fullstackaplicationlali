@@ -31,7 +31,8 @@ const Submit = () => {
     const { imagePath, setImagePath, polygonFrame, setResponse, inputsRef, submitRef, loaderRef, responseRef } = useContext(ImgContext);
     const handleClick = async (e) => {
         e.preventDefault()
-        const imageDetails = { imagePath, polygonFrame }
+        const imageDetails = { imagePath }
+        // const imageDetails = { imagePath, polygonFrame }
         inputsRef.current.style.display = 'none'
         submitRef.current.style.display = 'none'
         loaderRef.current.style.display = 'block'
