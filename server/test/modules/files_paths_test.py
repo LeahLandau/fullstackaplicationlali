@@ -1,7 +1,6 @@
 import unittest
 from unittest.mock import patch, Mock
 from modules.files_paths import *
-from modules.handle_error import *
 
 
 class TestFileExist(unittest.TestCase):

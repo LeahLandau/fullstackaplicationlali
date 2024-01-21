@@ -1,7 +1,6 @@
 import os
 from os.path import exists, splitext
 
-from .handle_error import *
 
 def path_exist(file_path):
   if not exists(file_path):
