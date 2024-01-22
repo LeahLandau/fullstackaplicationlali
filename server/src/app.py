@@ -1,17 +1,15 @@
 from flask import Flask
-from flask_cors import CORS
-from waitress import serve
 
 from routes.route import *
 
 
-app = Flask(__name__)
-CORS(app) 
+app = Flask(__name__,static_folder='../../build', static_url_path='/')
 app.register_blueprint(routes)
 
-@app.route('/api')
+@app.route("/")
 def index():
-    return 'Image-Reduction'
+    return app.send_static_file("index.html")
 
-if __name__ == '__main__':
-    serve(app, host="0.0.0.0", port=5000)
+@app.route('/api')
+def api():
+    return 'Image-Reduction'
