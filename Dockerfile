@@ -6,7 +6,7 @@ FROM node:16-alpine as client-builder
 ARG REACT_APP_SERVER_PATH
 ENV REACT_APP_SERVER_PATH=$REACT_APP_SERVER_PATH
 
-COPY client/package.json client/package-lock.json ./
+COPY client/package.json ./
 RUN npm install
 COPY client .
 RUN npm run build
