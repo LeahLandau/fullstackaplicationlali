@@ -26,6 +26,7 @@ const SelectionImage = ({ setImagePath }) => {
 
             const ExtractingNames = arr.map((item) => {
                 const splitBySlash = item.split("/").slice(num + 3)
+                console.log("hghghghghghgh");
                 console.log(splitBySlash[0]);
 
                 return splitBySlash[0]
