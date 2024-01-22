@@ -14,7 +14,7 @@ const useStyles = createUseStyles({
     }
 })
 
-const SelectionImage = ({ setImagePath }) => {
+const SelectionImage = ({ setImagePath, setIsImages }) => {
 
     const css = useStyles();
 
@@ -25,11 +25,7 @@ const SelectionImage = ({ setImagePath }) => {
         const changeDataArrayToObject = (arr, num, val = '') => {
 
             const ExtractingNames = arr.map((item) => {
-                console.log(item);
                 const splitBySlash = item.split("/").slice(num + 3)
-                console.log("hghghghghghgh");
-                console.log(splitBySlash[0]);
-
                 return splitBySlash[0]
             })
             const arrWithoutMulti = ExtractingNames.filter((value, index) => ExtractingNames.indexOf(value) === index)
@@ -48,8 +44,10 @@ const SelectionImage = ({ setImagePath }) => {
         const get_images_names = async () => {
             const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/build/images`)
             if (response.data !== []) {
+                setIsImages(true);
                 return changeDataArrayToObject(response.data, 0);
             }
+            setIsImages(false);
             return []
         }
 

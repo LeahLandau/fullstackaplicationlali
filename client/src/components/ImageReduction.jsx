@@ -33,6 +33,7 @@ const ImageReduction = () => {
     const [open, setOpen] = useState(false)
     const [showButton, setShowButton] = useState(true)
     const [showNewComponent, setShowNewComponent] = useState(false);
+    const [isImages, setIsImages] = useState(false)
 
     const inputsRef = useRef(null);
     const submitRef = useRef(null);
@@ -77,11 +78,15 @@ const ImageReduction = () => {
                     onClose={handleClose}
                     aria-describedby="alert-dialog-description">
                     <DialogContent>
-                        <SelectionImage setImagePath={setImagePath}></SelectionImage>
+                        <SelectionImage setImagePath={setImagePath} setIsImages={setIsImages}></SelectionImage>
                     </DialogContent>
                     <DialogActions>
                         <div onClick={handleClose}>
-                            <Button onClick={handleClick} variant='primary'>Select</Button>
+                            {
+                                isImages === true ?
+                                    <Button onClick={handleClick} variant='primary'>Select</Button> :
+                                    ''
+                            }
                         </div>
                     </DialogActions>
                 </Dialog>

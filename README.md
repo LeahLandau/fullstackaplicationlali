@@ -4,28 +4,14 @@ This project is a full-stack application designed to blacking pixels in an image
 
 ## Table of Contents
 
-- [Image Reduction](#image-reduction)
-  - [Table of Contents](#table-of-contents)
-  - [Project Overview](#project-overview)
-  - [System requirements](#system-requirements)
-  - [Technologies](#technologies)
-  - [Server-Side Dependencies](#server-side-dependencies)
-  - [Client-Side Dependencies](#client-side-dependencies)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [API Documentation](#api-documentation)
-    - [Get Images Names](#get-images-names)
-      - [Request(1)](#request1)
-      - [Response(1)](#response1)
-      - [Example Request(1)](#example-request1)
-      - [Example Response(1)](#example-response1)
-      - [Error Handling(1)](#error-handling1)
-    - [Blackening Pixels](#blackening-pixels)
-      - [Request(2)](#request2)
-      - [Response(2)](#response2)
-      - [Example Request(2)](#example-request2)
-      - [Example Response(2)](#example-response2)
-      - [Error Handling(2)](#error-handling2)
+- [Project Overview](#project-overview)
+- [System requirements](#system-requirements)
+- [Technologies](#technologies)
+- [Server-Side Dependencies](#server-side-dependencies)
+- [Client-Side Dependencies](#client-side-dependencies)
+- [Installation](#installation)
+- [Usage](#usage)
+- [API Documentation](#api-documentation)
 
 ## Project Overview
 
