@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    container_name: server
+    volumes:
+      - ./server:/app
+      - images:/images
+    ports:
+      - "5000:5000"
+    stdin_open: true
+
+
+  client:
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    container_name: client
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    volumes:
+      - ./client:/app
+      - images:/app/public/images
+    environment: 
+      - FAST_REFRESH = false
+      - WDS_SOCKET_PORT=0
+      - WATCHPACK_POLLING=true
+
+volumes:
+  images:
+    name: images
+    driver: local
+    driver_opts:
+      type: none
+      device: "${DEVICE}"
+      o: bind
