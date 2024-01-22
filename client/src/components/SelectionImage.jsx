@@ -26,6 +26,8 @@ const SelectionImage = ({ setImagePath }) => {
 
             const ExtractingNames = arr.map((item) => {
                 const splitBySlash = item.split("/").slice(num + 3)
+                console.log(splitBySlash[0]);
+
                 return splitBySlash[0]
             })
             const arrWithoutMulti = ExtractingNames.filter((value, index) => ExtractingNames.indexOf(value) === index)
