@@ -42,7 +42,7 @@ const SelectionImage = ({ setImagePath }) => {
         }
 
         const get_images_names = async () => {
-            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/images`)
+            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/build/images`)
             if (response.data !== []) {
                 return changeDataArrayToObject(response.data, 0);
             }
