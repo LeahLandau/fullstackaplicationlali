@@ -1,13 +1,13 @@
 {
   "listeners": {
     "*:8080": {
-      "pass": "applications/python_app"
+      "pass": "applications/app"
     }
   },
   "applications": {
-    "python_app": {
+    "app": {
       "type": "python",
-      "path": "/www/src",
+      "path": "/app",
       "module": "app",
       "callable": "app"
     }
