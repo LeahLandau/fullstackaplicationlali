@@ -25,25 +25,23 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
         const changeDataArrayToObject = (arr, num, val = '') => {
 
             const ExtractingNames = arr.map((item) => {
-                const splitBySlash = item.split("/").slice(num + 4)
+                const splitBySlash = item.split("/").slice(num + 3)
                 return splitBySlash[0]
             })
             const arrWithoutMulti = ExtractingNames.filter((value, index) => ExtractingNames.indexOf(value) === index)
 
             return arrWithoutMulti.map((item) => {
-                if (item) {
-                    const path = `${val}/${item}`;
-                    const pathStart = path.startsWith('/') ? path : `/${path}`;
-                    const arrayFiltered = arr.filter((element) => element.startsWith(`/images${pathStart}`));
-                    return (item.endsWith(".jp2")) ? { name: item, path: path, isFolder: false } :
-                        { name: item, path: path, isFolder: true, items: changeDataArrayToObject(arrayFiltered, num + 1, path) };
-                }
+                const path = `${val}/${item}`;
+                const pathStart = path.startsWith('/') ? path : `/${path}`;
+                const arrayFiltered = arr.filter((element) => element.startsWith(`/images${pathStart}`));
+                return (item.endsWith(".jp2")) ? { name: item, path: path, isFolder: false } :
+                    { name: item, path: path, isFolder: true, items: changeDataArrayToObject(arrayFiltered, num + 1, path) };
             });
         }
 
         const get_images_names = async () => {
             const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/images`)
-            if (response.data !== []) {
+            if (response.data.length !== 0) {
                 setIsImages(true);
                 return changeDataArrayToObject(response.data, 0);
             }
@@ -55,6 +53,8 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
         if (cachedNames) {
             const imagesNames = JSON.parse(cachedNames);
             setImagesList(imagesNames);
+            if(imagesNames.length !== 0)
+                setIsImages(true)
         } else {
             const updateStorage = async () => {
                 const imagesNames = await get_images_names();
@@ -63,7 +63,8 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
             }
             updateStorage();
         }
-    }, [])
+    }, [setIsImages])
+
     const selectItem = (e) => {
         const clickedNode = e.itemData;
         const updateNode = (node, nodeName) => {
@@ -74,7 +75,7 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
                 const updatedItems = node.items.map((item) => {
                     return updateNode(item, nodeName);
                 });
-                return { ...node, items: updatedItems, };
+                return { ...node, items: updatedItems };
             }
             return node;
         };

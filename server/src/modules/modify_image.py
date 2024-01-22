@@ -6,6 +6,7 @@ from shapely.geometry import Polygon,Point
 from .files_paths import *
 
 def modify_image(file_path, polygon_frame):
+    file_path=f'/build{file_path}'
     path_exist(file_path) 
     file_is_jp2_image(file_path) 
     polygon_pixels = full_polygon(polygon_frame)
@@ -38,5 +39,5 @@ def open_read_write_image(file_path, matrix_of_pixels):
 def blackening_pixels(image_pixels, matrix_of_pixels):
     for pixel in matrix_of_pixels:
       row, column = pixel
-      image_pixels[:, row, column] = 0
+      image_pixels[:, column, row] = 0
     return image_pixels
