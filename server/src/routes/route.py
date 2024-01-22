@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, abort
 
 from modules.files_paths import *
 from modules.modify_image import *
-
+from app import *
 
 routes = Blueprint('routes', __name__)
 
@@ -22,7 +22,7 @@ def get_images_and_folders_names():
     try:
         # args = request.args
         directory_path = request.args.get('directory_path')
-        full_path = app.static_folder + image_path 
+        full_path = app.static_folder + directory_path 
         result = get_images_names(args.get(full_path))
         return result, 200
     except FileNotFoundError as error:
