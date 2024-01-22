@@ -29,13 +29,3 @@ def get_images_and_folders_names():
         abort(404,  str(error))
     except Exception as error:
         abort(400,  str(error))
-@routes.route('/api/get_images_names', methods=['GET'])
-def get_image_names():
-    try:
-        image_path = request.args.get('image_path')
-        full_path = app.static_folder + image_path 
-        return {"image_path": image_path}, 200
-    except FileNotFoundError as error:
-        abort(404, str(error))
-    except Exception as error:
-        abort(400, str(error))
