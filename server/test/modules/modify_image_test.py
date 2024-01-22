@@ -20,7 +20,7 @@ class TestModifyImage(unittest.TestCase):
     def test_file_path_doesnt_exist(self):
         with self.assertRaises(Exception) as context:
            modify_image('blablabla', np.array([[5,1] ,[6,1], [7,2], [8,2] ,[9,1], [9,2] ,[9,3], [8,4], [7,5], [6,4], [6,3], [5,3] ,[4,2]]))
-        self.assertEqual(str(context.exception), 'The path blablabla was not found')
+        self.assertEqual(str(context.exception), 'The path /blablabla was not found')
 
     @patch('modules.files_paths.exists',Mock(return_value = True))
     @patch('modules.files_paths.splitext',Mock(return_value = ('input/cake','.jpg')))
