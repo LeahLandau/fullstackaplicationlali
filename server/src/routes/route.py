@@ -12,12 +12,10 @@ def blackening_pixels():
         body = request.get_json()
         result = modify_image(body['imagePath'], body['polygonFrame'])
         return result, 200
-    except FileNotFoundError         # error = handle_error(error)
-as error:
-        abort(404, str(error))
+    except FileNotFoundError as error:
+        abort(404, error)
     except Exception as error:
-        # error = handle_error(error)
-        abort(400, str(error))
+        abort(400, error)
 
 @routes.route('/api/get_images_names', methods=['GET'])
 def get_images_and_folders_names():
@@ -26,8 +24,6 @@ def get_images_and_folders_names():
         result = get_images_names(args.get('directory_path'))
         return result, 200
     except FileNotFoundError as error:
-        # error = handle_error(error)
-        abort(404, str(error))
+        abort(404, error)
     except Exception as error:
-        # error = handle_error(error)
-        abort(400, str(error))
+        abort(400, error)
