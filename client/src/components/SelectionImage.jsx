@@ -5,6 +5,7 @@ import 'devextreme/dist/css/dx.light.css';
 import TreeView from 'devextreme-react/tree-view';
 
 import { ServerConfig } from '../configs/server';
+import Error from './Error';
 
 
 const useStyles = createUseStyles({
@@ -19,13 +20,14 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
     const css = useStyles();
 
     const [imagesList, setImagesList] = useState([])
-
+    const [isError, setIsError] = useState(false)
+    const [error, setError] = useState('')
     useEffect(() => {
 
         const changeDataArrayToObject = (arr, num, val = '') => {
 
             const ExtractingNames = arr.map((item) => {
-                const splitBySlash = item.split("/").slice(num + 3)
+                const splitBySlash = item.split("/").slice(num + 2)
                 return splitBySlash[0]
             })
             const arrWithoutMulti = ExtractingNames.filter((value, index) => ExtractingNames.indexOf(value) === index)
@@ -33,20 +35,27 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
             return arrWithoutMulti.map((item) => {
                 const path = `${val}/${item}`;
                 const pathStart = path.startsWith('/') ? path : `/${path}`;
-                const arrayFiltered = arr.filter((element) => element.startsWith(`/static/images${pathStart}`));
+                const arrayFiltered = arr.filter((element) => element.startsWith(`/images${pathStart}`));
                 return (item.endsWith(".jp2")) ? { name: item, path: path, isFolder: false } :
                     { name: item, path: path, isFolder: true, items: changeDataArrayToObject(arrayFiltered, num + 1, path) };
             });
         }
 
         const get_images_names = async () => {
-            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/images`)
-            if (response.data.length !== 0) {
-                setIsImages(true);
-                return changeDataArrayToObject(response.data, 0);
+            try {
+                const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/images`)
+                if (response.data.length !== 0) {
+                    setIsImages(true);
+                    return changeDataArrayToObject(response.data, 0);
+                }
+                setIsImages(false);
+                return []
+            } catch (error) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(error.response.data, "text/html");
+                setError(doc.querySelector("p").textContent);
+                setIsError(true)
             }
-            setIsImages(false);
-            return []
         }
 
         const cachedNames = sessionStorage.getItem('images_names');
@@ -58,8 +67,10 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
         } else {
             const updateStorage = async () => {
                 const imagesNames = await get_images_names();
-                sessionStorage.setItem('images_names', JSON.stringify(imagesNames));
-                setImagesList(imagesNames);
+                if (imagesNames) {
+                    sessionStorage.setItem('images_names', JSON.stringify(imagesNames));
+                    setImagesList(imagesNames);
+                }
             }
             updateStorage();
         }
@@ -87,7 +98,7 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
         }
     };
     return <>
-        <div className={css.wrraper}>
+        {!isError ? <div className={css.wrraper}>
             <TreeView
                 keyExpr="name"
                 displayExpr="name"
@@ -97,7 +108,8 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
                 selectByClick={true}
                 onItemSelectionChanged={selectItem}
             />
-        </div>
+        </div> : <Error response={`${error}`}></Error>
+        }
     </>
 }
 

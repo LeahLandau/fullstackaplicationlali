@@ -14,14 +14,11 @@ setuptools.setup(
         "flask",
         "flask-cors",
         "waitress",
-        "shapely",
-        "azure-storage-file",
-        "python-dotenv",
+        "shapely"
     ],
     extras_require ={
         "tests": ["pytest", "pytest_mock"],
         "server":["flask", "flask-cors", "waitress"],
-        "geographic_processing":["rasterio", "shapely",  "numpy"],
-        "Azure_communication":[ "azure-storage-file", "python-dotenv" ],
+        "geographic_processing":["rasterio", "shapely",  "numpy"]
     },
 )

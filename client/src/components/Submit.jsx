@@ -4,6 +4,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 
 import { ServerConfig } from '../configs/server';
+import { useState } from 'react';
+import Error from './Error';
 
 
 const useStyles = createUseStyles({
@@ -30,6 +32,9 @@ const Submit = ({ changeStat, imagePath, polygonFrame, setResponse, inputsRef, s
 
     const css = useStyles();
 
+    const [isError, setIsError] = useState(false)
+    const [error, setError] = useState('')
+
     const theme = createTheme({
         palette: {
             primary: {
@@ -45,23 +50,35 @@ const Submit = ({ changeStat, imagePath, polygonFrame, setResponse, inputsRef, s
         inputsRef.current.style.display = 'none'
         submitRef.current.style.display = 'none'
         loaderRef.current.style.display = 'block'
-        const response = await axios.post(`${ServerConfig.PATH}/blackening_pixels`, imageDetails)
-        setTimeout(() => {
-            loaderRef.current.style.display = 'none'
-            responseRef.current.style.display = 'block'
-        }, 1000);
-        setResponse(response.data)
+        try {
+            const response = await axios.post(`${ServerConfig.PATH}/blackening_pixels`, imageDetails)
+            setTimeout(() => {
+                loaderRef.current.style.display = 'none'
+                responseRef.current.style.display = 'block'
+            }, 1000);
+            setResponse(response.data)
+        } catch (error) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(error.response.data, "text/html");
+            setError(doc.querySelector("p").textContent);
+            setIsError(true)
+        }
     }
 
     return <>
-        <div ref={submitRef}>
-            <ThemeProvider theme={theme}>
-                <div onClick={changeStat}>
-                    <Button variant="contained" onClick={(e) => handleClick(e)} className={css.submit}>Send to censor</Button>
+        {!isError ? (
+            <div>
+                <div ref={submitRef}>
+                    <ThemeProvider theme={theme}>
+                        <div onClick={changeStat}>
+                            <Button variant="contained" onClick={(e) => handleClick(e)} className={css.submit}>Submit</Button>
+                        </div>
+                    </ThemeProvider>
                 </div>
-            </ThemeProvider>
-        </div>
-        <div className={css.loader} ref={loaderRef}></div>
+                <div className={css.loader} ref={loaderRef}></div>
+            </div>) : <Error response={`${error}`}></Error>
+        }
+
     </>
 }
 
