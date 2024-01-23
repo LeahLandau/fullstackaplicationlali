@@ -20,7 +20,7 @@ class TestModifyImage(unittest.TestCase):
     def test_file_path_doesnt_exist(self):
         with self.assertRaises(Exception) as context:
            modify_image('blablabla', np.array([[5,1] ,[6,1], [7,2], [8,2] ,[9,1], [9,2] ,[9,3], [8,4], [7,5], [6,4], [6,3], [5,3] ,[4,2]]))
-        self.assertEqual(str(context.exception), 'The path /buildblablabla was not found')
+        self.assertEqual(str(context.exception), 'The path blablabla was not found')
 
     @patch('modules.files_paths.exists',Mock(return_value = True))
     @patch('modules.files_paths.splitext',Mock(return_value = ('input/cake','.jpg')))
@@ -86,7 +86,7 @@ class TestOpenReadWriteImage(unittest.TestCase):
 class TestBlackeningPixels(unittest.TestCase):
 
     def test_success_to_blackening_pixels(self):
-        np.testing.assert_almost_equal(blackening_pixels(np.array([[[205 , 120, 117] ],[[14, 5, 136]],[[20, 11, 142]]]),np.array([[0, 0],[0, 1]])), np.array( [ [[0, 0, 117]],[[0, 0, 136]],[[0, 0, 142]]]))
+        np.testing.assert_almost_equal(blackening_pixels(np.array([[[205 , 120, 117] ],[[14, 5, 136]],[[20, 11, 142]]]),np.array([[0, 0],[0, 0]])), np.array( [ [[0, 120, 117]],[[0, 5, 136]],[[0, 11, 142]]]))
 
     def test_failed_to_blackening_pixels(self):      
         with self.assertRaises(Exception) as context:

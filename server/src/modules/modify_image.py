@@ -3,10 +3,10 @@ import json
 import numpy as np
 from shapely.geometry import Polygon,Point
 
+from .handle_error import *
 from .files_paths import *
 
 def modify_image(file_path, polygon_frame):
-    # file_path=f'/build{file_path}'
     path_exist(file_path) 
     file_is_jp2_image(file_path) 
     polygon_pixels = full_polygon(polygon_frame)

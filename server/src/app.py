@@ -1,7 +1,7 @@
 from flask import Flask
 
 from routes.route import *
-
+from waitress import serve
 
 app = Flask(__name__,static_folder='/static', static_url_path='/')
 app.register_blueprint(routes)
@@ -14,6 +14,6 @@ def index():
 def api():
     return 'Image-Reduction'
 
-@app.route('/app')
-def tryv():
-    return app.static_folder
+
+if __name__ == '__main__':
+    serve(app, host="0.0.0.0", port=5000)
