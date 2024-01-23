@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request, abort
 
 from modules.files_paths import *
 from modules.modify_image import *
-from app import app
+from app import *
 
 routes = Blueprint('routes', __name__)
 
