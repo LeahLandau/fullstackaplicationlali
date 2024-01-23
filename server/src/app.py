@@ -15,5 +15,5 @@ def api():
     return 'Image-Reduction'
 
 @app.route('/app')
-def api():
+def app():
     return app.static_folder
