@@ -2,6 +2,7 @@ from flask import Blueprint, request, abort, current_app
 
 from modules.files_paths import *
 from modules.modify_image import *
+from modules.convert_jp2 import *
 from modules.handle_error import *
 
 routes = Blueprint('routes', __name__)
@@ -32,3 +33,16 @@ def get_images_and_folders_names():
     except Exception as error:
         error = handle_error(error)
         abort(400, error)
+        
+@routes.route('/api/convert_jp2_to_jpeg', methods=['POST'])
+def convert_jp2():
+    try:
+        body = request.get_json()
+        result = convert_jp2_to_jpeg(current_app.static_folder + body['file_path_jp2'],current_app.static_folder + body['file_path_jpeg'] )
+        return result, 200
+    except FileNotFoundError as error:
+        error = handle_error(error)
+        abort(404, error)
+    except Exception as error:
+        error = handle_error(error)
+        abort(400, error)        

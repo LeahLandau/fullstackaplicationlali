@@ -4,8 +4,6 @@ import { createUseStyles } from 'react-jss'
 
 const useStyles = createUseStyles({
     borderCanvas: {
-        border: '2px solid black',
-        borderRadius: '10px',
         marginBottom: '10px',
         marginTop: '10px',
         width: '90vw',
@@ -14,7 +12,7 @@ const useStyles = createUseStyles({
     }
 });
 
-const Canvas = ({ setPolygonFrame, inputsRef, imagePath }) => {
+const Canvas = ({ setPolygonFrame, inputsRef, jpegImagePath }) => {
 
     const css = useStyles();
 
@@ -35,15 +33,15 @@ const Canvas = ({ setPolygonFrame, inputsRef, imagePath }) => {
                 canvas.height = imgOnCanvas.height;
                 context.drawImage(imgOnCanvas, 0, 0, imgOnCanvas.width, imgOnCanvas.height);
             };
-            imgOnCanvas.src = imagePath;
+            imgOnCanvas.src = jpegImagePath;
             setImg(imgOnCanvas);
         };
 
-        if (imagePath) {
+        if (jpegImagePath) {
             createImage();
             setPolygonFrame([])
         }
-    }, [imagePath, setPolygonFrame]);
+    }, [jpegImagePath, setPolygonFrame]);
 
     const startDrawing = (e) => {
         setIsDrawing(true);

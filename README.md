@@ -117,27 +117,27 @@ Please follow these steps to install and configure the project on your local mac
       This will open a bash terminal inside the server container.  
 
     This is what it should look like in the terminal:
-    ![terminal](images/terminal.png)
+    ![terminal](pic/terminal.png)
 
     This is what it should look like when you run the following commands:
+
+       ```bash
+       docker image ls
+       ```
+
+    ![docker-images](pic/docker-images.png)
 
        ```bash
        docker container ls
        ```
 
-    ![docker-container](images/docker-container.png)
-
-    ```bash
-       docker image ls
-       ```
-
-    ![docker-images](images/docker-images.png)
+    ![docker-container](pic/docker-container.png)
 
     ```bash
        docker volume ls
        ```
 
-    ![docker-volume](images/docker-volume.png)
+    ![docker-volume](pic/docker-volume.png)
 
 12. Inside the terminal of the client container, run the following command to install the required dependencies:
 
@@ -273,3 +273,49 @@ The image has been blackened successfully
 - If any other exception occurs during execution:
   - Status Code: 400 (Bad Request)
   - Error Message: An error message is tailored to the error
+
+### Convert JP2 to JPEG
+
+- Endpoint: `/api/convert_jp2_to_jpeg`
+- Method: POST
+- Purpose: Convert a JP2 image file to JPEG format.
+
+#### Request(3)
+
+- Body Format: JSON
+- Properties:
+  - `file_path_jp2`: The path to the JP2 image file.
+  - `file_path_jpeg`: The desired path for the converted JPEG image file.
+
+#### Response(3)
+
+- Status Code: 200 (OK)
+- Response Body Format: The converted image data
+
+#### Example Request(3)
+
+POST /api/convert_jp2_to_jpeg
+
+```json
+{
+     "file_path_jp2": "/images/image.jp2",
+     "file_path_jpeg": "/images/jpeg/convert.jpeg"
+}
+```
+
+#### Example Response(3)
+
+```text
+/images/jpeg/convert.jpeg
+```
+
+#### Error Handling(3)
+
+- If the specified JP2 image file does not exist:
+  - Status Code: 404 (Not Found)
+  - Error Message: "The path {file_path_jp2} was not found"
+
+- If any other exception occurs during execution:
+  - Status Code: 400 (Bad Request)
+  - Error Message: An error message is tailored to the error
+  

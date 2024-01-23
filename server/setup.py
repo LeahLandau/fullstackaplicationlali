@@ -9,6 +9,7 @@ setuptools.setup(
     install_requires = [
         "rasterio",
         "numpy",
+        "imageio",
         "pytest",
         "pytest_mock",
         "flask",
@@ -19,6 +20,6 @@ setuptools.setup(
     extras_require ={
         "tests": ["pytest", "pytest_mock"],
         "server":["flask", "flask-cors", "waitress"],
-        "geographic_processing":["rasterio", "shapely",  "numpy"]
+        "geographic_processing":["rasterio", "shapely",  "numpy", "imageio"]
     },
 )

@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react"
-
-
-const ReducedImage = ({ imagePath }) => {
-
-    const [url, setUrl] = useState('')
-
-    useEffect(() => {
-        setUrl(imagePath);
-    }, [imagePath]);
+const ReducedImage = ({ url }) => {
 
     return <>
-        <img src={url} alt="" width={150} height={150} />
+        <img src={url} alt="" width={400} height={300} />
     </>
 }
 

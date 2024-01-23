@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback } from 'react';
 import * as React from 'react';
 import { createUseStyles } from 'react-jss';
+import axios from 'axios';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -11,6 +12,7 @@ import Canvas from './Canvas';
 import Submit from './Submit'
 import Response from './Response'
 import SelectionImage from './SelectionImage';
+import { ServerConfig } from '../configs/server';
 
 
 const useStyles = createUseStyles({
@@ -34,6 +36,8 @@ const ImageReduction = () => {
     const [showButton, setShowButton] = useState(true)
     const [showNewComponent, setShowNewComponent] = useState(false);
     const [isImages, setIsImages] = useState(false)
+    const [jpegImagePath, setjpegImagePath] = useState(null)
+
 
     const inputsRef = useRef(null);
     const submitRef = useRef(null);
@@ -61,7 +65,13 @@ const ImageReduction = () => {
         setOpen(false);
     };
 
-    const handleClick = () => {
+       const handleClick = async () => {
+        const paths ={
+            file_path_jp2:imagePath,
+            file_path_jpeg:"/images/jpeg/convert.jpeg"
+        }
+        const response = await axios.post(`${ServerConfig.PATH}/convert_jp2_to_jpeg`,paths)
+        setjpegImagePath(response.data)
         setShowNewComponent(true);
     };
 
@@ -92,12 +102,12 @@ const ImageReduction = () => {
                 </Dialog>
             </React.Fragment>
             <div>
-                {showNewComponent && <Canvas imagePath={imagePath} setPolygonFrame={setPolygonFrame} inputsRef={inputsRef}></Canvas>}
-                {showNewComponent && polygonFrame.length > 0 && <Submit changeStat={changeStat} imagePath={imagePath} polygonFrame={polygonFrame} setResponse={setResponse} inputsRef={inputsRef} submitRef={submitRef} loaderRef={loaderRef} responseRef={responseRef} />}
-                {showNewComponent && <Response response={response} responseRef={responseRef} imagePath={imagePath} />}
+            {showNewComponent && <Canvas setPolygonFrame={setPolygonFrame} inputsRef={inputsRef} jpegImagePath={jpegImagePath}></Canvas>}
+            {showNewComponent && polygonFrame.length > 0 && <Submit changeStat={changeStat} imagePath={imagePath} polygonFrame={polygonFrame} setResponse={setResponse} inputsRef={inputsRef} submitRef={submitRef} loaderRef={loaderRef} responseRef={responseRef} />}
+            {showNewComponent && <Response response={response} responseRef={responseRef} imagePath={imagePath} />}
             </div>
         </div>
     </>
 }
 
-export default ImageReduction;
+export default ImageReduction;               
