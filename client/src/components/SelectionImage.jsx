@@ -25,7 +25,7 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
         const changeDataArrayToObject = (arr, num, val = '') => {
 
             const ExtractingNames = arr.map((item) => {
-                const splitBySlash = item.split("/").slice(num + 2)
+                const splitBySlash = item.split("/").slice(num + 3)
                 return splitBySlash[0]
             })
             const arrWithoutMulti = ExtractingNames.filter((value, index) => ExtractingNames.indexOf(value) === index)
@@ -33,14 +33,14 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
             return arrWithoutMulti.map((item) => {
                 const path = `${val}/${item}`;
                 const pathStart = path.startsWith('/') ? path : `/${path}`;
-                const arrayFiltered = arr.filter((element) => element.startsWith(`/images${pathStart}`));
+                const arrayFiltered = arr.filter((element) => element.startsWith(`/static/images${pathStart}`));
                 return (item.endsWith(".jp2")) ? { name: item, path: path, isFolder: false } :
                     { name: item, path: path, isFolder: true, items: changeDataArrayToObject(arrayFiltered, num + 1, path) };
             });
         }
 
         const get_images_names = async () => {
-            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/images`)
+            const response = await axios.get(`${ServerConfig.PATH}/get_images_names?directory_path=/static/images`)
             if (response.data.length !== 0) {
                 setIsImages(true);
                 return changeDataArrayToObject(response.data, 0);
