@@ -41,7 +41,7 @@ const Submit = ({ changeStat, imagePath, polygonFrame, setResponse, inputsRef, s
 
     const handleClick = async (e) => {
         e.preventDefault()
-        const imageDetails = { imagePath:`/static${imagePath}`, polygonFrame: JSON.stringify(polygonFrame) }
+        const imageDetails = { imagePath, polygonFrame: JSON.stringify(polygonFrame) }
         inputsRef.current.style.display = 'none'
         submitRef.current.style.display = 'none'
         loaderRef.current.style.display = 'block'
