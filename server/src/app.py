@@ -13,3 +13,7 @@ def index():
 @app.route('/api')
 def api():
     return 'Image-Reduction'
+
+@app.route('/app')
+def api():
+    return app.static_folder
