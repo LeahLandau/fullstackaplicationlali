@@ -39,7 +39,7 @@ def convert_jp2():
     try:
         body = request.get_json()
         result = convert_jp2_to_jpeg(current_app.static_folder + body['file_path_jp2'],current_app.static_folder + body['file_path_jpeg'] )
-        _, _, extracted_path = result.partition(current_app.static_folder)
+        _, _, result = result.partition(current_app.static_folder)
         return result, 200
     except FileNotFoundError as error:
         error = handle_error(error)
