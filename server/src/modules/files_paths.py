@@ -1,7 +1,6 @@
 import os
 from os.path import exists, splitext
 
-
 def path_exist(file_path):
   if not exists(file_path):
     raise FileNotFoundError(f'The path {file_path} was not found')
