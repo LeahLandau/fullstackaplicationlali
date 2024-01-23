@@ -7,8 +7,8 @@
   "applications": {
     "app": {
       "type": "python",
-      "path": "/app",
-      "module": "src/app",
+      "path": "/app/src",
+      "module": "app",
       "callable": "app"
     }
   },
