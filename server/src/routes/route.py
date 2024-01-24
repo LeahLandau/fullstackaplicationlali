@@ -2,7 +2,8 @@ from flask import Blueprint, jsonify, request, abort
 
 from modules.files_paths import *
 from modules.modify_image import *
-from app import *
+from modules.handle_error import *
+
 
 routes = Blueprint('routes', __name__)
 
@@ -13,19 +14,21 @@ def blackening_pixels():
         result = modify_image(body['imagePath'], body['polygonFrame'])
         return result, 200
     except FileNotFoundError as error:
-        abort(404, str(error))
+        error = handle_error(error)
+        abort(404, error)
     except Exception as error:
-        abort(400,  str(error))
+        error = handle_error(error)
+        abort(400, error)
 
 @routes.route('/api/get_images_names', methods=['GET'])
 def get_images_and_folders_names():
     try:
-        directory_path = request.args.get('directory_path')
-        full_path = app.static_folder + directory_path
-        # args = request.args
-        result = get_images_names(full_path)
+        args = request.args
+        result = get_images_names(args.get('directory_path'))
         return result, 200
     except FileNotFoundError as error:
-        abort(404,  str(error))
+        error = handle_error(error)
+        abort(404, error)
     except Exception as error:
-        abort(400,  str(error))
+        error = handle_error(error)
+        abort(400, error)

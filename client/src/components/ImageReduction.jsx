@@ -93,7 +93,7 @@ const ImageReduction = () => {
             </React.Fragment>
             <div>
                 {showNewComponent && <Canvas imagePath={imagePath} setPolygonFrame={setPolygonFrame} inputsRef={inputsRef}></Canvas>}
-                {showNewComponent && <Submit changeStat={changeStat} imagePath={imagePath} polygonFrame={polygonFrame} setResponse={setResponse} inputsRef={inputsRef} submitRef={submitRef} loaderRef={loaderRef} responseRef={responseRef} />}
+                {showNewComponent && polygonFrame.length > 0 && <Submit changeStat={changeStat} imagePath={imagePath} polygonFrame={polygonFrame} setResponse={setResponse} inputsRef={inputsRef} submitRef={submitRef} loaderRef={loaderRef} responseRef={responseRef} />}
                 {showNewComponent && <Response response={response} responseRef={responseRef} imagePath={imagePath} />}
             </div>
         </div>
