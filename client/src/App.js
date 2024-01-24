@@ -2,7 +2,7 @@ import ImageReduction from './components/ImageReduction'
 
 function App() {
   return <>
-    <ImageReduction></ImageReduction>
+    <div>lllllllllllaaaaaaalllllllliiiiiiii</div>
   </>;
 }
 
