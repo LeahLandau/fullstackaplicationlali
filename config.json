@@ -7,10 +7,10 @@
   "routes": [
     {
       "match": {
-        "uri": "^/$"
+        "uri": "/"
       },
       "action": {
-        "share": "/app/static",
+        "share": "/app/static/index.html",
         "fallback": {
           "pass": "applications/app"
         }
