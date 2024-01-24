@@ -12,6 +12,7 @@ def read_image_pixels(file_path):
         image_pixels = src.read()
     return image_pixels
 
+
 def save_image_pixels(pixels, file_path):
     pixels_reshaped = pixels.squeeze()
     pixels_normalized = (pixels_reshaped - pixels_reshaped.min()) / (pixels_reshaped.max() - pixels_reshaped.min()) * 255
