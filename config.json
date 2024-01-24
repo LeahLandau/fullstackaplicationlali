@@ -1,13 +1,42 @@
 {
   "listeners": {
     "*:8080": {
-      "pass": "applications/app"
+      "pass": "routes"
     }
   },
+  "routes": [
+    {
+      "match": {
+        "uri": "^/$"
+      },
+      "action": {
+        "share": "/app/static",
+        "fallback": {
+          "pass": "applications/app"
+        }
+      }
+    },
+    {
+      "match": {
+        "uri": "^/api"
+      },
+      "action": {
+        "pass": "applications/app"
+      }
+    },
+    {
+      "action": {
+        "share": "/app/static",
+        "fallback": {
+          "pass": "applications/app"
+        }
+      }
+    }
+  ],
   "applications": {
     "app": {
       "type": "python",
-      "path": "/app/src",
+      "path": "/usr/local/etc/nginx",
       "module": "app",
       "callable": "app"
     }
