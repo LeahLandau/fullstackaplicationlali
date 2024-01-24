@@ -1,7 +1,9 @@
 name: 🚀 publish apllication
 
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - withconvert
 
 jobs:
   publish:
