@@ -7,7 +7,7 @@
   "routes": [
     {
       "action": {
-        "share": "/www/static"
+        "share": "/static"
     }
     }
   ],
