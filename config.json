@@ -15,22 +15,6 @@
           "pass": "applications/app"
         }
       }
-    },
-    {
-      "match": {
-        "uri": "^/api"
-      },
-      "action": {
-        "pass": "applications/app"
-      }
-    },
-    {
-      "action": {
-        "share": "/app/static",
-        "fallback": {
-          "pass": "applications/app"
-        }
-      }
     }
   ],
   "applications": {
