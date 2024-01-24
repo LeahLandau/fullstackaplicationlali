@@ -2,7 +2,7 @@ name: 🚀 publish apllication
 
 on:
   push:
-    - staticfiles
+    - 'staticfiles'
 
 jobs:
   publish:
