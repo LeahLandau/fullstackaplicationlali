@@ -6,16 +6,37 @@
   },
   "routes": [
     {
+      "match": {
+        "uri": "^/$"
+      },
       "action": {
         "share": "/static",
-        "index": "index.html"
-    }
+        "fallback": {
+          "pass": "applications/app"
+        }
+      }
+    },
+    {
+      "match": {
+        "uri": "^/api"
+      },
+      "action": {
+        "pass": "applications/app"
+      }
+    },
+    {
+      "action": {
+        "share": "/static",
+        "fallback": {
+          "pass": "applications/app"
+        }
+      }
     }
   ],
   "applications": {
     "app": {
       "type": "python",
-      "path": "/app/src",
+      "path": "app/src",
       "module": "app",
       "callable": "app"
     }
