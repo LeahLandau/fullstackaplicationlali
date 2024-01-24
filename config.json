@@ -1,22 +1,9 @@
 {
   "listeners": {
     "*:8080": {
-      "pass": "routes"
+      "pass": "applications/app"
     }
   },
-  "routes": [
-    {
-      "match": {
-        "uri": "/"
-      },
-      "action": {
-        "share": "/app/static/index.html",
-        "fallback": {
-          "pass": "applications/app"
-        }
-      }
-    }
-  ],
   "applications": {
     "app": {
       "type": "python",
