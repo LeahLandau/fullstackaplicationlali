@@ -54,7 +54,6 @@ class TestGetImagesNames(unittest.TestCase):
     @patch('routes.route.handle_error', Mock(return_value="stat: path should be string, bytes, os.PathLike or integer, not NoneType") )
     def test_400(self):
         response=self.app.get('/api/get_images_names')
-        print(response.data)
         self.assertEqual(response.data, b'<!doctype html>\n<html lang=en>\n<title>400 Bad Request</title>\n<h1>Bad Request</h1>\n<p>stat: path should be string, bytes, os.PathLike or integer, not NoneType</p>\n' )
         self.assertEqual(response.status_code, 400)
 
@@ -93,3 +92,4 @@ class TestConvertJP2toJPEG(unittest.TestCase):
         })
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, b'<!doctype html>\n<html lang=en>\n<title>400 Bad Request</title>\n<h1>Bad Request</h1>\n<p>Exception</p>\n')
+

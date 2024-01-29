@@ -117,7 +117,7 @@ Please follow these steps to install and configure the project on your local mac
       This will open a bash terminal inside the server container.  
 
     This is what it should look like in the terminal:
-    ![terminal](pic/terminal.png)
+    ![terminal](pictures/terminal.png)
 
     This is what it should look like when you run the following commands:
 
@@ -125,19 +125,19 @@ Please follow these steps to install and configure the project on your local mac
        docker image ls
        ```
 
-    ![docker-images](pic/docker-images.png)
+    ![docker-images](pictures/docker-images.png)
 
        ```bash
        docker container ls
        ```
 
-    ![docker-container](pic/docker-container.png)
+    ![docker-container](pictures/docker-container.png)
 
     ```bash
        docker volume ls
        ```
 
-    ![docker-volume](pic/docker-volume.png)
+    ![docker-volume](pictures/docker-volume.png)
 
 12. Inside the terminal of the client container, run the following command to install the required dependencies:
 
@@ -318,4 +318,3 @@ POST /api/convert_jp2_to_jpeg
 - If any other exception occurs during execution:
   - Status Code: 400 (Bad Request)
   - Error Message: An error message is tailored to the error
-  
