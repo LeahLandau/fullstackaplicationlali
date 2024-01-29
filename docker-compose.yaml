@@ -9,10 +9,9 @@ services:
     container_name: server
     volumes:
       - ./server:/app
-      - images:/static/images
-      - logs:/var/log
+      - images:/images
     ports:
-      - "8080:8080"
+      - "5000:5000"
     stdin_open: true
 
   client:
@@ -32,13 +31,6 @@ services:
       - WATCHPACK_POLLING=true
 
 volumes:
-  logs:
-    name: logs
-    driver: local
-    driver_opts:
-      type: none
-      device: "${LOGS}"
-      o: bind
   images:
     name: images
     driver: local

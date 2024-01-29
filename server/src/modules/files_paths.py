@@ -15,7 +15,8 @@ def get_images_names(directory_path):
         image_names = []
         for dirpath, dirnames, files in os.walk(directory_path):
             image_names += append_jp2_images(dirpath, files)
-        return image_names
+        return [path.replace("/static", "") for path in image_names]
+        # return image_names
 
 def append_jp2_images(dirpath, files):
         jp2_image_names = []

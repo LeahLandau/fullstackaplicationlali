@@ -3,6 +3,7 @@ import rasterio
 import numpy as np
 
 def convert_jp2_to_jpeg(file_path_jp2, file_path_jpeg):
+    print('file_path_jp2', file_path_jp2)
     pixels = read_image_pixels(file_path_jp2)
     save_image_pixels(pixels, file_path_jpeg)
     return file_path_jpeg

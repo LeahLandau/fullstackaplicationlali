@@ -1,18 +1,15 @@
 import logging
 
-def setup_logger(log_file_path='/var/log/errors.log'):
+def setup_logger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
-    
-    handler = logging.FileHandler(log_file_path, mode='a')
-    
+    handler = logging.FileHandler(f"{__name__}.log", mode='w')
     formatter = logging.Formatter("%(asctime)s %(message)s")
     handler.setFormatter(formatter)
-    
     logger.addHandler(handler)
     return logger
 
-logger = setup_logger(log_file_path='/var/log/errors.log')
+logger = setup_logger()
 
 def handle_error(error):
     logger.info(f'The error is: "{error}"')

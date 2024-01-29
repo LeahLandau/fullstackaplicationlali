@@ -1,7 +1,9 @@
 name: 🚀 publish apllication
 
 on:
-  workflow_dispatch
+  push:
+    branches:
+      - finaly29-01-2024
 
 jobs:
   publish:
@@ -24,9 +26,17 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
+    # - name: 🔖 Get release tag name
+    #   id: get_release
+    #   uses: cardinalby/git-get-release-action@v1
+    #   env:
+    #     GITHUB_TOKEN: ${{ github.token }}
+    #   with:
+    #     latest: true
     - name: 🔖 Set fake release tag name
       run: echo "FAKE_RELEASE_TAG=v0.0.1" >> "$GITHUB_ENV"
        
+   
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
       id: downcase
@@ -57,8 +67,15 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/${{ env.REPO }}/image-reduction:${{ env.TAG }}
+        tags: ghcr.io/${{ env.REPO }}/my-fullstack-project:${{ env.TAG }}
         labels: ${{ steps.docker_meta.outputs.labels }}
         file: ./Dockerfile
         build-args: |
           REACT_APP_SERVER_PATH=${{ vars.REACT_APP_SERVER_PATH }}
+          REACT_APP_IMAGES_VOLUME_NAME=${{ vars.REACT_APP_IMAGES_VOLUME_NAME }}
+          SERVER_IMAGES_VOLUME_NAME=${{ vars.SERVER_IMAGES_VOLUME_NAME }}
+
+
+
+
+
