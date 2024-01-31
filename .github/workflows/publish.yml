@@ -24,13 +24,8 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 🔖 Get release tag name
-      id: get_release
-      uses: cardinalby/git-get-release-action@v1
-      env:
-        GITHUB_TOKEN: ${{ github.token }}
-      with:
-        latest: true
+    - name: 🔖 Set fake release tag name
+      run: echo "FAKE_RELEASE_TAG=v0.0.1" >> "$GITHUB_ENV"
    
     - name: 🔄 downcase REPO
       uses: ASzc/change-string-case-action@v1
