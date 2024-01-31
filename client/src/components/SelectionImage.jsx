@@ -80,9 +80,7 @@ const SelectionImage = ({ setImagePath, setIsImages }) => {
 
   const selectItem = (e) => {
     const clickedNode = e.itemData;
-    console.log(clickedNode);
     const updateNode = (node, nodeID) => {
-      console.log(node ,nodeID);
       if (node.id === nodeID) {
         return { ...node, expanded: !node.expanded };
       }
