@@ -11,7 +11,8 @@ routes = Blueprint('routes', __name__)
 def blackening_pixels():
     try:
         body = request.get_json()
-        result = modify_image(current_app.static_folder + body['imagePath'], body['polygonFrame'])
+        # result = modify_image(current_app.static_folder + body['imagePath'], body['polygonFrame'])
+        result = modify_image("/static" +body['imagePath'], body['polygonFrame'])
         return result, 200
     except FileNotFoundError as error:
         error = handle_error(error)
@@ -24,7 +25,8 @@ def blackening_pixels():
 def get_images_and_folders_names():
     try:
         directory_path = request.args.get('directory_path')
-        directory_path = current_app.static_folder + directory_path
+        # directory_path = current_app.static_folder + directory_path
+        directory_path = "/static" + directory_path
         result = get_images_names(directory_path)
         return result, 200
     except FileNotFoundError as error:
@@ -38,8 +40,9 @@ def get_images_and_folders_names():
 def convert_jp2():
     try:
         body = request.get_json()
-        result = convert_jp2_to_jpeg(current_app.static_folder + body['file_path_jp2'],current_app.static_folder + body['file_path_jpeg'] )
-        _, _, result = result.partition(current_app.static_folder)
+        # result = convert_jp2_to_jpeg(current_app.static_folder + body['file_path_jp2'],current_app.static_folder + body['file_path_jpeg'] )
+        result = convert_jp2_to_jpeg('/static'+body['file_path_jp2'],'/static'+body['file_path_jpeg'] )
+        _, _, result = result.partition('/static')
         return result, 200
     except FileNotFoundError as error:
         error = handle_error(error)
