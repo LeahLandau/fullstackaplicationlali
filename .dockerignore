@@ -1,6 +1,5 @@
 # Ignore Node.js and React build files
 node_modules/
-build/
 *.log
 
 # Ignore Python-related files
@@ -31,5 +30,7 @@ logs/
 .gitignore
 .pre-commit-config.yaml
 .github/
+ruff.toml
+.eslintrc.json
 
 LICENSE.md

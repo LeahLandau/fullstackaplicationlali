@@ -74,18 +74,33 @@ Please follow these steps to install and configure the project on your local mac
 3. After cloning the project, navigate to the project directory.
 4. Create a new file in the project directory and name it `.env`.
 5. Open the `.env` file in a text editor.
-6. Add the following two variables to the `.env` file:
+6. Add the following six variables to the `.env` file:
 
    ```text
-   DEVICE=relative_position_of_image_folder
-   REACT_APP_SERVER_PATH=routing_address_to_server
+   REACT_APP_SERVER_PATH = http://localhost:8080/api
+   REACT_APP_IMAGES_VOLUME_NAME=/images
+   SERVER_IMAGES_VOLUME_NAME=/static
+   DEVICE=\BlurImages\images
+   LOGS=\BlurImages\var\log
+   ERROR_HANDLER=/var/log/errors.log
    ```
 
-   Replace `relative_position_of_image_folder` with the relative position of the image folder to the project.  
-   For example, if the image folder is in the same directory as the project, you can set it as `./images`.
+   Replace `DEVICE` with the relative position of your image folder to the project.
+   For example, if the image folder is in the same directory as the project, you can set it as `./images`. If the image folder is in a different directory, update the path accordingly.
 
-   Replace `routing_address_to_server` with the routing address that the client addresses to the server.  
-   For example, if the server is hosted locally and the endpoint is `/api`, you can set it as `http://localhost:5000/api`.
+   Replace `REACT_APP_SERVER_PATH` with the routing address that the client addresses to the server.
+   For example, if the server is hosted locally and the endpoint is `/api`, set it as `http://localhost:8080/api`. If your server has a different address or endpoint, modify the routing address accordingly.
+
+    update the `LOGS` variable.
+    This variable represents the path to the log files for your project. If you have a different directory structure or location for your log files, modify this variable to match the correct path.
+
+   If necessary, update the `REACT_APP_IMAGES_VOLUME_NAME` variable.
+   This variable represents the volume name for your React app's images. If you have a different folder name or structure for your images, modify this variable to match the actual volume name.
+
+   If necessary, update the `SERVER_IMAGES_VOLUME_NAME` variable.
+   This variable represents the volume name for your server's static images. If you have a different folder name or structure for your static images, update this variable to match the actual volume name.
+
+   By following these instructions and replacing the relevant data in the `.env` file, you will ensure that your project uses the correct paths, addresses, and volume names.
 
 7. Make sure Docker is running on your computer.
 8. Start a bash terminal and navigate to the base directory of the project the "images-reduction" folder like this:
@@ -117,7 +132,7 @@ Please follow these steps to install and configure the project on your local mac
       This will open a bash terminal inside the server container.  
 
     This is what it should look like in the terminal:
-    ![terminal](pic/terminal.png)
+    ![terminal](pictures/terminal.png)
 
     This is what it should look like when you run the following commands:
 
@@ -125,19 +140,19 @@ Please follow these steps to install and configure the project on your local mac
        docker image ls
        ```
 
-    ![docker-images](pic/docker-images.png)
+    ![docker-images](pictures/docker-images.png)
 
        ```bash
        docker container ls
        ```
 
-    ![docker-container](pic/docker-container.png)
+    ![docker-container](pictures/docker-container.png)
 
     ```bash
        docker volume ls
        ```
 
-    ![docker-volume](pic/docker-volume.png)
+    ![docker-volume](pictures/docker-volume.png)
 
 12. Inside the terminal of the client container, run the following command to install the required dependencies:
 
@@ -318,4 +333,3 @@ POST /api/convert_jp2_to_jpeg
 - If any other exception occurs during execution:
   - Status Code: 400 (Bad Request)
   - Error Message: An error message is tailored to the error
-  

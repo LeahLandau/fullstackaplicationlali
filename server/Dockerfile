@@ -5,4 +5,4 @@ USER root
 RUN pip install .
 RUN useradd -m -s /bin/bash newspace
 USER newspace
-EXPOSE 5000
+EXPOSE 8080

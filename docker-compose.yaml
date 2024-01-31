@@ -1,7 +1,5 @@
 version: '3.8'
-
 services:
-
   server:
     build:
       dockerfile: Dockerfile
@@ -14,6 +12,9 @@ services:
     ports:
       - "8080:8080"
     stdin_open: true
+    environment: 
+      - SERVER_IMAGES_VOLUME_NAME=${SERVER_IMAGES_VOLUME_NAME}
+      - ERROR_HANDLER=${ERROR_HANDLER}
 
   client:
     build:
@@ -26,11 +27,12 @@ services:
     volumes:
       - ./client:/app
       - images:/app/public/images
-    environment: 
+    environment:
       - FAST_REFRESH = false
       - WDS_SOCKET_PORT=0
       - WATCHPACK_POLLING=true
-
+      - REACT_APP_SERVER_PATH=${REACT_APP_SERVER_PATH}
+      - REACT_APP_IMAGES_VOLUME_NAME=${REACT_APP_IMAGES_VOLUME_NAME}
 volumes:
   logs:
     name: logs

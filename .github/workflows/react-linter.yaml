@@ -1,0 +1,28 @@
+name: 💄 React Linter
+
+on:
+  push:
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: 📂 Checkout
+        uses: actions/checkout@v3
+      
+      - name: 🐍 Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      - name: ⏬ Install dependencies
+        run: |
+          npm install eslint --save-dev
+          npm install eslint-plugin-react@latest --save-dev
+
+      - name: 💄Run ESLint
+        run: npx eslint --ext .jsx .

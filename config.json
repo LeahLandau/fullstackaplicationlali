@@ -4,6 +4,7 @@
       "pass": "routes"
     }
   },
+
   "routes": [
     {
       "match": {
@@ -17,6 +18,7 @@
       }
     }
   ],
+
   "applications": {
     "app": {
       "type": "python",
@@ -25,6 +27,7 @@
       "callable": "app"
     }
   },
+  
   "access_log": {
     "path": "/var/log/unit/access.log",
     "format": "$remote_addr - - [$time_local] \"$request_line\" $status $body_bytes_sent \"$header_referer\" \"$header_user_agent\" $request_time"
