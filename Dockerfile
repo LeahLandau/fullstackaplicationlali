@@ -38,11 +38,14 @@ RUN groupadd -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
 # Ensure the required directories have proper permissions
 USER root
 RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/unit \
-    && chown -R unituser:unitgroup /var/lib/unit /var/run/unit /var/log/unit \
-    && chmod -R 775 /var/lib/unit /var/run/unit /var/log/unit
+    && chown -R unituser:unitgroup /var/lib/unit /var/log/unit \
+    && chmod -R 775 /var/lib/unit /var/log/unit \
+    && mkdir -p /var/run/unit \
+    && chown unituser:unitgroup /var/run/unit \
+    && chmod 775 /var/run/unit
 
 # Switch to the non-root user
 USER unituser:unitgroup
 
 # Command to run the application
-# CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
+CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
