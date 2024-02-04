@@ -26,8 +26,8 @@ WORKDIR /app
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org .
 # RUN chown -R unit:unit /path/to/venv/
 # RUN chown -R unit:unit 
+RUN chmod -R 777 .
 USER unit
 
 EXPOSE 8080
 
-CMD [ "sudo unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
