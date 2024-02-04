@@ -113,7 +113,6 @@
 
 # EXPOSE 8080
 
-
 FROM node:16-alpine as client-builder
 
 ARG REACT_APP_IMAGES_VOLUME_NAME=/images
@@ -139,6 +138,7 @@ COPY ./server ./app
 WORKDIR /app
 
 
+
 RUN pip install .
 
 RUN addgroup -g 1000 unitgroup && adduser -D -u 1000 -G unitgroup unituser
@@ -146,7 +146,6 @@ RUN addgroup -g 1000 unitgroup && adduser -D -u 1000 -G unitgroup unituser
 RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit \
     && chown -R unituser:unitgroup /var/lib/unit /var/run/unit
 
-USER unituser:unitgroup
-
+USER unituser
 
 EXPOSE 8080
