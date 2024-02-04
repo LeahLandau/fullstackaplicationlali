@@ -36,14 +36,13 @@ RUN pip install .
 RUN groupadd -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
 
 # Ensure the required directories have proper permissions
+USER root
 RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/unit \
-    && chown -R unituser:unitgroup /var/lib/unit /var/run/unit /var/log/unit
+    && chown -R unituser:unitgroup /var/lib/unit /var/run/unit /var/log/unit \
+    && chmod -R 775 /var/lib/unit /var/run/unit /var/log/unit
 
 # Switch to the non-root user
 USER unituser:unitgroup
-
-# Expose the application port
-EXPOSE 8080
 
 # Command to run the application
 # CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
