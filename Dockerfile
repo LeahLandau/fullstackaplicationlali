@@ -48,4 +48,4 @@ RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/un
 USER unituser:unitgroup
 
 # Command to run the application
-CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
+# CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
