@@ -25,13 +25,14 @@ COPY --from=client-builder /build ./static
 COPY ./server ./app
 
 # Create a non-root user and group
-RUN addgroup -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
+RUN groupadd -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
 
 # Ensure the required directories have proper permissions
 RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/unit \
     && chown -R unituser:unitgroup /var/lib/unit /var/run/unit /var/log/unit
 
-USER unituser
+# Switch to the non-root user
+USER unituser:unitgroup
 
 # Set the working directory
 WORKDIR /app
