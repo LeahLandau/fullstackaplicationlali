@@ -30,4 +30,4 @@ USER unit
 
 EXPOSE 8080
 
-CMD [ "unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
+CMD [ "sudo unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
