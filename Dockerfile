@@ -22,13 +22,11 @@ COPY --from=client-builder /build ./static
 COPY ./server ./app
 WORKDIR /app
 
-# Ensure the required directories have proper permissions
-USER root
-RUN chown -R unit:unit /var/lib/unit /var/run/unit /var/log/unit
-USER unit:unit
 
 RUN pip install .
 
+USER root
+RUN chown -R unit:unit /var/lib/unit /var/run/unit /var/log/unit
 USER unit:unit
 
 EXPOSE 8080
