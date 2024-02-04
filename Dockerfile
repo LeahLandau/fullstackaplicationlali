@@ -25,6 +25,6 @@ WORKDIR /app
 # RUN pip install .
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org .
 
-USER nginx
+USER unit
 
 EXPOSE 8080
