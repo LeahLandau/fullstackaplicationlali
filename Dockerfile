@@ -34,42 +34,42 @@
 
 # EXPOSE 8080
 
-FROM node:16-alpine as client-builder
+# FROM node:16-alpine as client-builder
 
-ARG REACT_APP_IMAGES_VOLUME_NAME=/images
-ENV REACT_APP_IMAGES_VOLUME_NAME=${REACT_APP_IMAGES_VOLUME_NAME}
+# ARG REACT_APP_IMAGES_VOLUME_NAME=/images
+# ENV REACT_APP_IMAGES_VOLUME_NAME=${REACT_APP_IMAGES_VOLUME_NAME}
 
-COPY client/package.json ./
-RUN npm install
-COPY client .
-RUN npm run build
+# COPY client/package.json ./
+# RUN npm install
+# COPY client .
+# RUN npm run build
 
 
-FROM unit:1.31.1-python3.11 as server-builder
+# FROM unit:1.31.1-python3.11 as server-builder
 
-ARG SERVER_IMAGES_VOLUME_NAME=/static
-ENV SERVER_IMAGES_VOLUME_NAME=${SERVER_IMAGES_VOLUME_NAME}
+# ARG SERVER_IMAGES_VOLUME_NAME=/static
+# ENV SERVER_IMAGES_VOLUME_NAME=${SERVER_IMAGES_VOLUME_NAME}
 
-ARG ERROR_HANDLER=/var/log/errors.log
-ENV ERROR_HANDLER=${ERROR_HANDLER}
+# ARG ERROR_HANDLER=/var/log/errors.log
+# ENV ERROR_HANDLER=${ERROR_HANDLER}
 
-COPY config.json /docker-entrypoint.d/config.json
-COPY --from=client-builder /build ./static
-COPY ./server ./app
-WORKDIR /app
+# COPY config.json /docker-entrypoint.d/config.json
+# COPY --from=client-builder /build ./static
+# COPY ./server ./app
+# WORKDIR /app
 
-RUN adduser -D unituser
+# RUN adduser -D unituser
 
-RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts \
-    && chown -R unituser:unituser /var/lib/unit
+# RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts \
+#     && chown -R unituser:unituser /var/lib/unit
 
-USER unituser
+# USER unituser
 
-RUN pip install .
+# RUN pip install .
 
-USER unituser
+# USER unituser
 
-EXPOSE 8080
+# EXPOSE 8080
 
 # FROM node:16-alpine as client-builder
 
@@ -114,3 +114,39 @@ EXPOSE 8080
 # EXPOSE 8080
 
 
+FROM node:16-alpine as client-builder
+
+ARG REACT_APP_IMAGES_VOLUME_NAME=/images
+ENV REACT_APP_IMAGES_VOLUME_NAME=${REACT_APP_IMAGES_VOLUME_NAME}
+
+COPY client/package.json ./
+RUN npm install
+COPY client .
+RUN npm run build
+
+
+FROM unit:1.31.1-python3.11 as server-builder
+
+ARG SERVER_IMAGES_VOLUME_NAME=/static
+ENV SERVER_IMAGES_VOLUME_NAME=${SERVER_IMAGES_VOLUME_NAME}
+
+ARG ERROR_HANDLER=/var/log/errors.log
+ENV ERROR_HANDLER=${ERROR_HANDLER}
+
+COPY config.json /docker-entrypoint.d/config.json
+COPY --from=client-builder /build ./static
+COPY ./server ./app
+WORKDIR /app
+
+
+RUN pip install .
+
+RUN addgroup -g 1000 unitgroup && adduser -D -u 1000 -G unitgroup unituser
+
+RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit \
+    && chown -R unituser:unitgroup /var/lib/unit /var/run/unit
+
+USER unituser:unitgroup
+
+
+EXPOSE 8080
