@@ -24,6 +24,14 @@ COPY config.json /docker-entrypoint.d/config.json
 COPY --from=client-builder /build ./static
 COPY ./server ./app
 
+
+
+# Set the working directory
+WORKDIR /app
+
+# Install the server application
+RUN pip install .
+
 # Create a non-root user and group
 RUN groupadd -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
 
@@ -34,14 +42,8 @@ RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/un
 # Switch to the non-root user
 USER unituser:unitgroup
 
-# Set the working directory
-WORKDIR /app
-
-# Install the server application
-RUN pip install .
-
 # Expose the application port
 EXPOSE 8080
 
 # Command to run the application
-CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
+# CMD ["unitd", "--no-daemon", "--control", "0.0.0.0:8080"]
