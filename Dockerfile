@@ -26,7 +26,7 @@ WORKDIR /app
 RUN pip install .
 
 USER root
-RUN chown -R unit:unit /var/lib/unit /var/run/unit /var/log/unit
+RUN chown -R unit:unit /var/lib/unit /var/log/unit
 USER unit:unit
 
 EXPOSE 8080
