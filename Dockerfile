@@ -26,7 +26,10 @@ WORKDIR /app
 RUN pip install .
 
 USER root
-RUN chown -R unit:unit /var/lib/unit /var/log/unit
+RUN if [ ! -d "/var/lib/unit/certs" ]; then mkdir -p /var/lib/unit/certs; fi \
+    && if [ ! -d "/var/lib/unit/scripts" ]; then mkdir -p /var/lib/unit/scripts; fi \
+    && chown -R unit:unit /var/lib/unit
+
 USER unit:unit
 
 EXPOSE 8080
