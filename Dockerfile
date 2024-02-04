@@ -24,7 +24,8 @@ COPY ./server ./app
 WORKDIR /app
 # RUN pip install .
 RUN pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org .
-
+# RUN chown -R unit:unit /path/to/venv/
+RUN chown -R unit:unit
 USER unit
 
 EXPOSE 8080
