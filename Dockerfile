@@ -27,17 +27,21 @@ WORKDIR /app
 
 RUN pip install .
 
-RUN groupadd -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
+# RUN groupadd -g 1000 unitgroup && useradd -u 1000 -g unitgroup unituser
 
-USER root
-RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/unit \
-    && chown -R unituser:unitgroup /var/lib/unit /var/log/unit \
-    && chmod -R 775 /var/lib/unit /var/log/unit \
-    && mkdir -p /var/run/unit \
-    && chown unituser:unitgroup /var/run/unit \
-    && chmod 775 /var/run/unit
+# USER root
+# RUN mkdir -p /var/lib/unit/certs /var/lib/unit/scripts /var/run/unit /var/log/unit \
+#     && chown -R unituser:unitgroup /var/lib/unit /var/log/unit \
+#     && chmod -R 775 /var/lib/unit /var/log/unit \
+#     && mkdir -p /var/run/unit \
+#     && chown unituser:unitgroup /var/run/unit \
+#     && chmod 775 /var/run/unit
 
-USER unituser:unitgroup
+# USER unituser:unitgroup
+RUN chown -R unit:unit /app/
+RUN chown -R unit:unit /static/
+
+USER unit:unit
 
 EXPOSE 8080
 
