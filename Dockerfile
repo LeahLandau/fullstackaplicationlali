@@ -40,6 +40,8 @@ RUN pip install .
 # USER unituser:unitgroup
 RUN chown -R unit:unit /app/
 RUN chown -R unit:unit /static/
+RUN chown -R unit:unit /var/
+
 
 USER unit:unit
 
