@@ -42,8 +42,8 @@ RUN chown -R unit:unit /app/
 RUN chown -R unit:unit /static/
 RUN chown -R unit:unit /var/
 # RUN chmod-socket=666
-RUN chmod 666 /docker-entrypoint.d/config.json
-
+# RUN chmod 666 /docker-entrypoint.d/config.json
+RUN chmod 666 /var/run/docker.sock
 USER unit:unit
 
 EXPOSE 8080
