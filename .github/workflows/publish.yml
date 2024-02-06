@@ -42,7 +42,7 @@ jobs:
     - name: ♻️ Set correct environment
       run: |
         TAG=${{ steps.get_release.outputs.tag_name }}
-        TAG=${{ env.FAKE_RELEASE_TAG }}
+        # TAG=${{ env.FAKE_RELEASE_TAG }}
         echo "TAG=$TAG" >> "$GITHUB_ENV"
         REPO=${{ steps.downcase.outputs.lowercase }}
         echo "REPO=$REPO" >> "$GITHUB_ENV"
