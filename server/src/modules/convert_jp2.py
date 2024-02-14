@@ -1,7 +1,7 @@
 import imageio
 import rasterio
 import numpy as np
-# 
+
 
 def convert_jp2_to_jpeg(file_path_jp2, file_path_jpeg):
     pixels = read_image_pixels(file_path_jp2)
